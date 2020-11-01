@@ -1,5 +1,6 @@
 package com.myclass.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class CategoryService {
 	@Autowired
 	CategoryRepository categoryRepo;
 	
-	public List<Category> findByCategoryTypeId(int id)
+	public ArrayList<Category> findByCategoryTypeId(int id)
 	{
-		
+		return this.categoryRepo.findByCategoryTypeId(id);
 	}
 } 
