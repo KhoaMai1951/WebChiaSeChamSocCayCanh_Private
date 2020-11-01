@@ -2,6 +2,7 @@ package com.myclass.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,10 @@ public class CategoryService {
 	public ArrayList<Category> findByCategoryTypeId(int id)
 	{
 		return this.categoryRepo.findByCategoryTypeId(id);
+	}
+	
+	public Category findById(int id)
+	{
+		return this.categoryRepo.findById(id).orElse(null);
 	}
 } 

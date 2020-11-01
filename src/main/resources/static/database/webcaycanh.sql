@@ -40,20 +40,31 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(225) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table webcaycanh.categories: ~0 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` (`id`, `category_type_id`, `name`, `is_deleted`) VALUES
+	(1, 1, 'Bonsai', 0),
+	(2, 1, 'Cây cảnh văn phòng', 0),
+	(3, 1, 'Cây thủy sinh', 0),
+	(4, 1, 'Xương rồng', 0),
+	(5, 2, 'Mẹo vặt', 0),
+	(6, 2, 'Tâm sự', 0),
+	(7, 2, 'Kiến thức', 0);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.category_post
 CREATE TABLE IF NOT EXISTS `category_post` (
   `category_id` int(11) DEFAULT NULL,
-  `post_id` int(11) DEFAULT NULL
+  `post_id` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table webcaycanh.category_post: ~0 rows (approximately)
 /*!40000 ALTER TABLE `category_post` DISABLE KEYS */;
+INSERT INTO `category_post` (`category_id`, `post_id`) VALUES
+	(1, 'a4366568-2b80-46fd-8d65-c2463e09dca7'),
+	(3, 'a4366568-2b80-46fd-8d65-c2463e09dca7');
 /*!40000 ALTER TABLE `category_post` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.category_types
@@ -111,19 +122,32 @@ CREATE TABLE IF NOT EXISTS `images` (
 
 -- Dumping structure for table webcaycanh.posts
 CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL DEFAULT '0',
+  `id` varchar(50) NOT NULL DEFAULT '',
+  `user_id` int(11) DEFAULT '0',
   `created_date` datetime NOT NULL,
-  `edited_date` datetime NOT NULL,
+  `edited_date` datetime DEFAULT NULL,
   `image_id` int(11) NOT NULL DEFAULT '0',
   `content` text NOT NULL,
   `title` varchar(225) NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `is_deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table webcaycanh.posts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` (`id`, `user_id`, `created_date`, `edited_date`, `image_id`, `content`, `title`, `is_deleted`) VALUES
+	('0e6eedbc-b78a-49b9-83fe-58422a1154d2', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('161d5a50-cdba-4bd8-bb9d-1e5a22eb8cff', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('23b8a042-2881-4529-8d3b-27d3ed0939be', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('49f5d465-4a44-40fd-97f2-ee349ff30cac', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('54c76cd0-3dd0-4ad9-a57c-a8c06b96cd0a', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('58a238cc-ac87-4a65-82b7-0930693c7c71', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('69a0609d-f46a-4047-94a9-82cfdfb51d2d', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('7de24ba1-0b07-4689-a9a5-d2ea5be4a7ca', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('a4366568-2b80-46fd-8d65-c2463e09dca7', 0, '2020-11-01 00:00:00', NULL, 0, '', 'a', NULL),
+	('e1903549-47f5-487e-ba12-530bfcc261e7', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('ed8b12ea-060e-4029-955b-96e42ffef3bf', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
+	('f14249ba-8b34-48ce-a0a2-af6212f272d4', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.reports
@@ -193,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.users: ~1 rows (approximately)
+-- Dumping data for table webcaycanh.users: ~0 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `role_id`, `username`, `email`, `password`, `is_deleted`, `created_date`) VALUES
 	(1, 1, 'dangkhoa', 'khoa@gmail.com', '123', 0, '2020-10-17 16:59:37');
