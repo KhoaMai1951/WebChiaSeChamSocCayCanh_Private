@@ -1,0 +1,37 @@
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+	<!-- Static navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Project name</a>
+			</div>
+			<form class="form-inline">
+				<input style="width:30rem" class="form-control mr-lg-10" type="search"
+					placeholder="Tìm kiếm theo tiêu đề, tác giả hoặc tag" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+			</form>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Trang chủ</a></li>
+					<li><a href="#">Thành viên nổi bật</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="./">Viết bài <span
+							class="sr-only">(current)</span></a></li>
+					<li><a href="../navbar-static-top/">Đăng ký</a></li>
+					<li><a href="../navbar-fixed-top/">Đăng nhập</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+		<!--/.container-fluid -->
+	</nav>
+</header>
