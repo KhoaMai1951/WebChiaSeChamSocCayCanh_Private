@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity(name = "posts")
 public class Post {
@@ -27,9 +29,6 @@ public class Post {
 	@Column(name = "edited_date")
 	private Date editDate;
 
-	@Column(name = "image_id")
-	private int imageId;
-
 	private String content;
 	private String title;
 
@@ -43,6 +42,19 @@ public class Post {
 			inverseJoinColumns = @JoinColumn(name = "category_id") // Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới (Person)
 	)
 	private List<Category> categories;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "image_id", referencedColumnName = "id")
+	private Image image;
+
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 	public List<Category> getCategories() {
 		return categories;
@@ -84,13 +96,6 @@ public class Post {
 		this.editDate = editDate;
 	}
 
-	public int getImageId() {
-		return imageId;
-	}
-
-	public void setImageId(int imageId) {
-		this.imageId = imageId;
-	}
 
 	public String getContent() {
 		return content;
