@@ -6,6 +6,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +27,7 @@ import com.myclass.service.PostService;
 
 @Controller
 @RequestMapping("/admin/news")
-public class NewsController {
+public class AdminNewsController {
 	@Autowired
 	CategoryService categoryService;
 
@@ -54,26 +55,11 @@ public class NewsController {
 	String postAddNews(@ModelAttribute Post post, 
 			Model model, 
 			HttpServletRequest request,
-			@RequestPart("imageUpload") MultipartFile file) {
+			@RequestPart("imageUpload") MultipartFile file) throws IOException {
         
-		String path = FileSystems.getDefault()
-		        .getPath("")
-		        .toAbsolutePath()
-		        .toString();
-
-        try {
-            var fileName = file.getOriginalFilename();
-            var is = file.getInputStream();
-
-            Files.copy(is, Paths.get(path + PathConstant.IMAGE_DIRECTORY + fileName),
-                    StandardCopyOption.REPLACE_EXISTING);
-            	
-        } catch (IOException e) {
-
-           
-        }
+		
         
-		//this.postService.save(post, request, categoryService);
+		this.postService.save(post, request, categoryService, file);
 		return "admin-page/v1/index";
 	}
 }

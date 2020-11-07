@@ -24,12 +24,12 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@Column(name = "url")
 	private String url;
 
 	@Column(name = "is_deleted")
 	private boolean isDeleted;
 
-	
 	@OneToOne(mappedBy = "image")
 	private Post post;
 
@@ -64,13 +64,13 @@ public class Image {
 	}
 
 
-	public Post getPost() {
-		return post;
-	}
-
-
-	public void setPost(Post post) {
-		this.post = post;
-	}
+//	public Post getPost() {
+//		return post;
+//	}
+//
+//
+//	public void setPost(Post post) {
+//		this.post = post;
+//	}
 
 }

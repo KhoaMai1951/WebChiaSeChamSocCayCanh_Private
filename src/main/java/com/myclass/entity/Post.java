@@ -38,16 +38,17 @@ public class Post {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "category_post", // Tạo ra một join Table tên là "address_person"
 			joinColumns = @JoinColumn(name = "post_id"), // TRong đó, khóa ngoại chính là address_id trỏ tới class
-													// hiện tại (Address)
-			inverseJoinColumns = @JoinColumn(name = "category_id") // Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới (Person)
+			// hiện tại (Address)
+			inverseJoinColumns = @JoinColumn(name = "category_id") // Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
+																	// (Person)
 	)
 	private List<Category> categories;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "image_id", referencedColumnName = "id")
+	@JoinColumn(name = "image_id")
 	private Image image;
 
-	
+
 	public Image getImage() {
 		return image;
 	}
@@ -95,7 +96,6 @@ public class Post {
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
-
 
 	public String getContent() {
 		return content;

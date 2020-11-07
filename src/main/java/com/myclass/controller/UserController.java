@@ -19,10 +19,6 @@ public class UserController {
 //		return userService.findAll();
 //	}
 	
-	@GetMapping(path="/")
-	String users(Model model) {
-		model.addAttribute("user", userService.findById(1));
-		return "main-web/index";
-	}
+	
 
 }
