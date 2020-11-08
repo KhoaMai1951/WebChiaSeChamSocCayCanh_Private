@@ -43,7 +43,7 @@ public class PostService {
 				StandardCopyOption.REPLACE_EXISTING);
 
 		Image image = new Image();
-		image.setUrl(PathConstant.IMAGE_DIRECTORY + fileName);
+		image.setUrl(PathConstant.DATABASE_IMAGE_DIRECTORY + fileName);
 
 		post.setImage(image);
 
@@ -70,4 +70,7 @@ public class PostService {
 		this.postRepo.save(post);
 	}
 
+	public List<Post> findAll() {
+		return postRepo.findAll();
+	}
 }

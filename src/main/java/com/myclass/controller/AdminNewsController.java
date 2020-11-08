@@ -36,7 +36,9 @@ public class AdminNewsController {
 
 	// news management page
 	@GetMapping(path = "")
-	String news() {
+	String news(Model model) {
+		model.addAttribute("posts", postService.findAll());
+		
 		return "admin-page/v1/news/index";
 	}
 
