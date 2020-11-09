@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/index.html=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/news/add.html=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/news/index.html=UTF-8
+encoding//src/main/resources/templates/fragment/admin-page-fragment/sidebar.html=UTF-8
+encoding//src/main/resources/templates/fragment/main-web-fragment/footer.html=UTF-8
+encoding//src/main/resources/templates/fragment/main-web-fragment/header.html=UTF-8
+encoding//src/main/resources/templates/fragment/main-web-fragment/news.html=UTF-8
+encoding//src/main/resources/templates/fragment/main-web-fragment/sidebar.html=UTF-8
+encoding//src/main/resources/templates/layout/main-layout.html=UTF-8
+encoding//src/main/resources/templates/main-web/index.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8
