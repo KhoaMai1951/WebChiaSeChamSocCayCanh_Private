@@ -16,11 +16,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@Entity(name = "posts")
+import org.hibernate.annotations.Table;
+
+@Entity(name = "posts") 
 public class Post {
 	@Id
 	private String id;
 
+	@Column(name = "user_id")
 	private int userId;
 
 	@Column(name = "created_date")
@@ -33,7 +36,7 @@ public class Post {
 	private String title;
 
 	@Column(name = "is_deleted")
-	private Boolean isDeleted;
+	private boolean isDeleted;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "category_post", // Tạo ra một join Table tên là "address_person"
@@ -113,11 +116,11 @@ public class Post {
 		this.title = title;
 	}
 
-	public Boolean getIsDeleted() {
+	public boolean getIsDeleted() {
 		return isDeleted;
 	}
 
-	public void setIsDeleted(Boolean isDeleted) {
+	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
 

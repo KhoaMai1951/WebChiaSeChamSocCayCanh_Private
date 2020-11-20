@@ -73,4 +73,20 @@ public class PostService {
 	public List<Post> findAll() {
 		return postRepo.findAll();
 	}
+	
+	public List<Post> findAllDeleted() {
+		return postRepo.findAllDeleted();
+	}
+	
+	public Post findById(String id) {
+		return postRepo.findById(id).get();
+	}
+	
+	public void softDelete(String id) {
+		postRepo.softDelete(id);
+	}
+	
+	public void restore(String id) {
+		postRepo.restore(id);
+	}
 }

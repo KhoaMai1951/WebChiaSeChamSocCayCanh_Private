@@ -17,4 +17,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 			+ "AND is_deleted = 0", nativeQuery = true)
 	ArrayList<Category> findByCategoryTypeId(@Param("category_type_id") Integer categoryTypeId);
 
+//	@Query(value = "SELECT * FROM categories "
+//			+ "WHERE category_type_id = :category_type_id "
+//			+ "AND is_deleted = 0", nativeQuery = true)
+//	ArrayList<Category> findByPostId(@Param("category_type_id") Integer postId);
 }
