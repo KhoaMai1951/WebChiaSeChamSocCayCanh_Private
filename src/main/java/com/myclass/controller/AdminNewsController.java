@@ -65,12 +65,7 @@ public class AdminNewsController {
 
 	// show edit news page
 	@GetMapping(path = "/edit/{id}")
-	String editNews(Model model, @PathVariable(value = "id") String id) {
-
-		for (Category category : this.postService.findById(id).getCategories()) {
-
-		}
-
+	String editNews(Model model, @PathVariable(value = "id") String id) { 
 		model.addAttribute("plantCategories", categoryService.findByCategoryTypeId(1));
 		model.addAttribute("contentCategories", categoryService.findByCategoryTypeId(2));
 		model.addAttribute("post", this.postService.findById(id));
@@ -97,5 +92,12 @@ public class AdminNewsController {
 
 		model.addAttribute("posts", postService.findAllDeleted());
 		return "admin-page/v1/news/deleted";
+	}
+	
+	// show detail news page
+	@GetMapping(path = "/detail")
+	String detail(@RequestParam String id, Model model) {
+		model.addAttribute("post", postService.findById(id));
+		return "admin-page/v1/news/detail";
 	}
 }

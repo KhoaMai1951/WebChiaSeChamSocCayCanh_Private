@@ -18,53 +18,59 @@ USE `webcaycanh`;
 
 -- Dumping structure for table webcaycanh.books
 CREATE TABLE IF NOT EXISTS `books` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(225) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.books: ~5 rows (approximately)
+-- Dumping data for table webcaycanh.books: ~0 rows (approximately)
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` (`id`, `name`) VALUES
-	(1, 'a'),
-	(2, 'b'),
-	(3, 'c'),
-	(4, 'd'),
-	(5, 'e');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_type_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(225) NOT NULL DEFAULT '0',
+  `category_type_id` int(11) DEFAULT NULL,
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.categories: ~0 rows (approximately)
+-- Dumping data for table webcaycanh.categories: ~4 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` (`id`, `category_type_id`, `name`, `is_deleted`) VALUES
-	(1, 1, 'Bonsai', 0),
-	(2, 1, 'Cây cảnh văn phòng', 0),
-	(3, 1, 'Cây thủy sinh', 0),
-	(4, 1, 'Xương rồng', 0),
-	(5, 2, 'Mẹo vặt', 0),
-	(6, 2, 'Tâm sự', 0),
-	(7, 2, 'Kiến thức', 0);
+INSERT INTO `categories` (`id`, `category_type_id`, `is_deleted`, `name`) VALUES
+	(1, 1, 0, 'Bonsai'),
+	(2, 1, 0, 'Xương rồng'),
+	(3, 1, 0, 'Cây cảnh văn phòng'),
+	(4, 2, 0, 'Mẹo vặt'),
+	(5, 2, 0, 'Sự kiện');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.category_post
 CREATE TABLE IF NOT EXISTS `category_post` (
-  `category_id` int(11) DEFAULT NULL,
-  `post_id` varchar(50) DEFAULT NULL
+  `post_id` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.category_post: ~0 rows (approximately)
+-- Dumping data for table webcaycanh.category_post: ~8 rows (approximately)
 /*!40000 ALTER TABLE `category_post` DISABLE KEYS */;
-INSERT INTO `category_post` (`category_id`, `post_id`) VALUES
-	(1, 'a4366568-2b80-46fd-8d65-c2463e09dca7'),
-	(3, 'a4366568-2b80-46fd-8d65-c2463e09dca7');
+INSERT INTO `category_post` (`post_id`, `category_id`) VALUES
+	('5344bb84-d774-4cf1-a4a1-966391673a61', 1),
+	('5344bb84-d774-4cf1-a4a1-966391673a61', 2),
+	('5344bb84-d774-4cf1-a4a1-966391673a61', 4),
+	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 1),
+	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 2),
+	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 3),
+	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 4),
+	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 5),
+	('bd55bdc4-a66c-4df9-81fb-c60a2446f794', 1),
+	('bd55bdc4-a66c-4df9-81fb-c60a2446f794', 4),
+	('bd55bdc4-a66c-4df9-81fb-c60a2446f794', 5),
+	('5d918a79-b366-4f47-8fb5-9a1b83ba9bd3', 2),
+	('5d918a79-b366-4f47-8fb5-9a1b83ba9bd3', 5),
+	('f29f1141-54c8-44c8-bb5d-a514cac3997d', 2),
+	('f29f1141-54c8-44c8-bb5d-a514cac3997d', 5),
+	('fc969d16-1f03-4b39-92ad-4cd700cb794e', 2);
 /*!40000 ALTER TABLE `category_post` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.category_types
@@ -107,47 +113,68 @@ CREATE TABLE IF NOT EXISTS `following_users` (
 /*!40000 ALTER TABLE `following_users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `following_users` ENABLE KEYS */;
 
--- Dumping structure for table webcaycanh.images
-CREATE TABLE IF NOT EXISTS `images` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(225) NOT NULL,
-  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
-  `post_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+-- Dumping structure for table webcaycanh.hibernate_sequence
+CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.images: ~0 rows (approximately)
-/*!40000 ALTER TABLE `images` DISABLE KEYS */;
-/*!40000 ALTER TABLE `images` ENABLE KEYS */;
+-- Dumping data for table webcaycanh.hibernate_sequence: ~5 rows (approximately)
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+	(20),
+	(20),
+	(20),
+	(20),
+	(20);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
--- Dumping structure for table webcaycanh.posts
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` varchar(50) NOT NULL DEFAULT '',
-  `user_id` int(11) DEFAULT '0',
-  `created_date` datetime NOT NULL,
-  `edited_date` datetime DEFAULT NULL,
-  `image_id` int(11) NOT NULL DEFAULT '0',
-  `content` text NOT NULL,
-  `title` varchar(225) NOT NULL DEFAULT '0',
+-- Dumping structure for table webcaycanh.images
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int(11) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `is_deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Dumping data for table webcaycanh.images: ~1 rows (approximately)
+/*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` (`id`, `url`, `is_deleted`) VALUES
+	(12, '/images/post/945a5c97-bbdb-4671-8961-bf46c5958f60.png', 0),
+	(13, '/images/post/647e8209-86cc-4afe-8bba-2dd650a2388c.png', 0),
+	(14, '/images/post/c1357a6f-a540-4f28-bfa1-28fc94501613.png', 0),
+	(15, '/images/post/df47ac4a-b80e-4464-bc00-1a59d5b55d8f.png', 0),
+	(16, '/images/post/e8cf6e28-b2a1-427a-b28b-5823857d9487.png', 0),
+	(17, '/images/post/aa6b2aa9-4ee8-4342-bcf2-db0f8e5cbf5d.png', 0),
+	(18, '/images/post/d52490bd-585f-4232-8a84-211f812fe761.png', 0),
+	(19, '/images/post/5069660b-c307-4a54-a52d-69da3487832e.png', 0);
+/*!40000 ALTER TABLE `images` ENABLE KEYS */;
+
+-- Dumping structure for table webcaycanh.posts
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` varchar(255) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  `edited_date` date DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `image_id` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `FKdt44ngxibfjiwb1w59qd23xmw` (`image_id`),
+  CONSTRAINT `FKdt44ngxibfjiwb1w59qd23xmw` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- Dumping data for table webcaycanh.posts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` (`id`, `user_id`, `created_date`, `edited_date`, `image_id`, `content`, `title`, `is_deleted`) VALUES
-	('0e6eedbc-b78a-49b9-83fe-58422a1154d2', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('161d5a50-cdba-4bd8-bb9d-1e5a22eb8cff', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('23b8a042-2881-4529-8d3b-27d3ed0939be', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('49f5d465-4a44-40fd-97f2-ee349ff30cac', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('54c76cd0-3dd0-4ad9-a57c-a8c06b96cd0a', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('58a238cc-ac87-4a65-82b7-0930693c7c71', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('69a0609d-f46a-4047-94a9-82cfdfb51d2d', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('7de24ba1-0b07-4689-a9a5-d2ea5be4a7ca', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('a4366568-2b80-46fd-8d65-c2463e09dca7', 0, '2020-11-01 00:00:00', NULL, 0, '', 'a', NULL),
-	('e1903549-47f5-487e-ba12-530bfcc261e7', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('ed8b12ea-060e-4029-955b-96e42ffef3bf', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL),
-	('f14249ba-8b34-48ce-a0a2-af6212f272d4', 0, '2020-11-01 00:00:00', NULL, 0, '', '', NULL);
+INSERT INTO `posts` (`id`, `content`, `created_date`, `edited_date`, `title`, `user_id`, `image_id`, `is_deleted`) VALUES
+	('28044a54-f88e-4230-8b93-5507e68b11e5', '', '2020-11-20', NULL, 'a', 0, 18, 0),
+	('5344bb84-d774-4cf1-a4a1-966391673a61', 'interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Susp', '2020-11-08', NULL, 'khoa', 0, 12, 0),
+	('5d918a79-b366-4f47-8fb5-9a1b83ba9bd3', 'Sometimes a boy just wants to know wether or not he is loved..... And if  no one tells him..... Things get messy.\r\n', '2020-11-20', NULL, 'Test', 0, 15, 0),
+	('bd55bdc4-a66c-4df9-81fb-c60a2446f794', 'This was my dad, I eventually distanced from him, as I got older he would complain that I would not treat him like a father, that\'s because he never treated me like a son.\r\n\r\n', '2020-11-20', NULL, 'abc', 0, 14, 0),
+	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 'ponent, it\'s marked checked. This method is valid for custom attributesth:attr also. Consider following example:', '2020-11-14', NULL, 'khoatrtrtr', 0, 13, 0),
+	('ec663ca6-0e39-44e0-9a86-43bf6f8efc45', '', '2020-11-20', NULL, 'abc', 0, 19, 1),
+	('f29f1141-54c8-44c8-bb5d-a514cac3997d', 'u Endo\'s Novel "Silence" is not only a masterwork of filmmaking but also an uncomfortable and profound meditation on Christianity. In this video essay I explore the spirituality of "Silence" and its deconstruction', '2020-11-20', NULL, 'Test', 0, 16, 1),
+	('fc969d16-1f03-4b39-92ad-4cd700cb794e', 'sdfsdf', '2020-11-20', NULL, 'a', 0, 17, 0);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.reports
@@ -182,17 +209,14 @@ CREATE TABLE IF NOT EXISTS `report_actions` (
 
 -- Dumping structure for table webcaycanh.roles
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(225) NOT NULL DEFAULT '0',
-  `decription` varchar(225) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.roles: ~2 rows (approximately)
+-- Dumping data for table webcaycanh.roles: ~0 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `name`, `decription`) VALUES
-	(1, 'ADMIN', 'Quản trị viên trang web'),
-	(2, 'USER', 'Người dùng của trang web');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.saved_posts
@@ -207,20 +231,17 @@ CREATE TABLE IF NOT EXISTS `saved_posts` (
 
 -- Dumping structure for table webcaycanh.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_id` int(11) NOT NULL DEFAULT '0',
-  `username` varchar(225) NOT NULL DEFAULT '0',
-  `email` varchar(225) NOT NULL DEFAULT '0',
-  `password` varchar(225) NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
-  `created_date` datetime NOT NULL,
+  `id` int(11) NOT NULL,
+  `created_date` date DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table webcaycanh.users: ~0 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `role_id`, `username`, `email`, `password`, `is_deleted`, `created_date`) VALUES
-	(1, 1, 'dangkhoa', 'khoa@gmail.com', '123', 0, '2020-10-17 16:59:37');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
