@@ -51,6 +51,22 @@ public class Post {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
+	@OneToMany
+    private List<Comment> comments;
+	
+	
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
 	public Image getImage() {
 		return image;

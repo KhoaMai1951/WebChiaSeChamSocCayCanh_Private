@@ -1,33 +1,61 @@
 package com.myclass.entity;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	private String username;
-	
+
 	private String email;
-	
+
 	private String password;
-	
-	@Column(name="is_deleted")
+
+	@Column(name = "is_deleted")
 	private boolean isDeleted;
-	
-	@Column(name="created_date")
+
+	@Column(name = "created_date")
 	private Date createdDate;
 
 	public int getId() {
 		return id;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "role_id")  
+	private Role role; 
+	
+	@OneToMany
+    private List<Comment> comments;
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public void setId(int id) {

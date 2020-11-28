@@ -11,17 +11,28 @@ import com.myclass.repository.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
-	public ArrayList<User> findAll()
-	{
+
+	public ArrayList<User> findAll() {
 		return (ArrayList<User>) userRepository.findAll();
-	} 
-	
-	public User findById(int id)
-	{
+	}
+
+	public User findById(int id) {
 		return userRepository.findById(id).get();
 	}
+
+	public int findUserByEmailAndPassword(User user) {
+		String email = user.getEmail();
+		String password = user.getPassword(); 
+
+		User userTemp = this.userRepository.findUserIdByEmailAndPassword(email, password);
+		if(userTemp != null)
+		{
+			return userTemp.getId();
+		}
+		return -1;
+	}
+
 }
