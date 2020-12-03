@@ -18,26 +18,33 @@ import com.myclass.service.UserService;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	// show login page
-	@GetMapping(path="/login")
+	@GetMapping(path = "/user/login")
 	String loginPage(Model model) {
 		model.addAttribute("user", new User());
 		return "main-web/v1/login.html";
 	}
-	
-	@PostMapping(path="/user/login")
+
+	// user logout
+	@GetMapping(path = "/user/logout")
+	String logout(HttpSession session) {
+		session.removeAttribute(UserConstant.USER_ID);
+		return "redirect:/";
+	}
+
+	@PostMapping(path = "/user/login")
 	String login(Model model, @ModelAttribute User user, HttpServletRequest request) {
-		
-		// check user credential  
+
+		// check user credential
 		int userId = userService.findUserByEmailAndPassword(user);
-		if(userId > 0) {
+		if (userId > 0) {
 			HttpSession session = request.getSession();
 			session.setAttribute(UserConstant.USER_ID, userId);
-		} 
-		return "main-web/v1/login.html";
+		}
+		return "redirect:/";
 	}
 }

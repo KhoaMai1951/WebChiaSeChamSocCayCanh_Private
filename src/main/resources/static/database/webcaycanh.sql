@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.categories: ~4 rows (approximately)
+-- Dumping data for table webcaycanh.categories: ~5 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `category_type_id`, `is_deleted`, `name`) VALUES
 	(1, 1, 0, 'Bonsai'),
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `category_post` (
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.category_post: ~8 rows (approximately)
+-- Dumping data for table webcaycanh.category_post: ~18 rows (approximately)
 /*!40000 ALTER TABLE `category_post` DISABLE KEYS */;
 INSERT INTO `category_post` (`post_id`, `category_id`) VALUES
 	('5344bb84-d774-4cf1-a4a1-966391673a61', 1),
@@ -70,7 +70,9 @@ INSERT INTO `category_post` (`post_id`, `category_id`) VALUES
 	('5d918a79-b366-4f47-8fb5-9a1b83ba9bd3', 5),
 	('f29f1141-54c8-44c8-bb5d-a514cac3997d', 2),
 	('f29f1141-54c8-44c8-bb5d-a514cac3997d', 5),
-	('fc969d16-1f03-4b39-92ad-4cd700cb794e', 2);
+	('fc969d16-1f03-4b39-92ad-4cd700cb794e', 2),
+	('29a367b6-09d2-4e33-a01c-3c906fcf8151', 2),
+	('29a367b6-09d2-4e33-a01c-3c906fcf8151', 4);
 /*!40000 ALTER TABLE `category_post` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.category_types
@@ -92,15 +94,17 @@ INSERT INTO `category_types` (`id`, `name`, `is_deleted`) VALUES
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
-  `post_id` int(11) NOT NULL DEFAULT '0',
-  `created_date` datetime NOT NULL,
-  `edited_date` datetime NOT NULL,
+  `post_id` varchar(225) NOT NULL DEFAULT '0',
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `edited_date` datetime DEFAULT NULL,
   `content` varchar(225) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.comments: ~0 rows (approximately)
+-- Dumping data for table webcaycanh.comments: ~1 rows (approximately)
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` (`id`, `user_id`, `post_id`, `created_date`, `edited_date`, `content`) VALUES
+	(28, 1, '29a367b6-09d2-4e33-a01c-3c906fcf8151', '2020-11-29 00:00:00', NULL, 'abc');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.following_users
@@ -121,11 +125,11 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 -- Dumping data for table webcaycanh.hibernate_sequence: ~5 rows (approximately)
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-	(20),
-	(20),
-	(20),
-	(20),
-	(20);
+	(29),
+	(29),
+	(29),
+	(29),
+	(29);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.images
@@ -136,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.images: ~1 rows (approximately)
+-- Dumping data for table webcaycanh.images: ~11 rows (approximately)
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
 INSERT INTO `images` (`id`, `url`, `is_deleted`) VALUES
 	(12, '/images/post/945a5c97-bbdb-4671-8961-bf46c5958f60.png', 0),
@@ -146,13 +150,16 @@ INSERT INTO `images` (`id`, `url`, `is_deleted`) VALUES
 	(16, '/images/post/e8cf6e28-b2a1-427a-b28b-5823857d9487.png', 0),
 	(17, '/images/post/aa6b2aa9-4ee8-4342-bcf2-db0f8e5cbf5d.png', 0),
 	(18, '/images/post/d52490bd-585f-4232-8a84-211f812fe761.png', 0),
-	(19, '/images/post/5069660b-c307-4a54-a52d-69da3487832e.png', 0);
+	(19, '/images/post/5069660b-c307-4a54-a52d-69da3487832e.png', 0),
+	(20, '/images/post/d7334e5d-f156-4bc2-b8dc-96170813e376.png', 0),
+	(21, '/images/post/97991c35-4da1-4873-bc87-10b52f09966c.png', 0),
+	(22, '/images/post/70691499-fdd2-4889-b7bc-c3d613180b81.png', 0);
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.posts
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` varchar(255) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `created_date` date DEFAULT NULL,
   `edited_date` date DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -164,12 +171,15 @@ CREATE TABLE IF NOT EXISTS `posts` (
   CONSTRAINT `FKdt44ngxibfjiwb1w59qd23xmw` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.posts: ~0 rows (approximately)
+-- Dumping data for table webcaycanh.posts: ~11 rows (approximately)
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 INSERT INTO `posts` (`id`, `content`, `created_date`, `edited_date`, `title`, `user_id`, `image_id`, `is_deleted`) VALUES
-	('28044a54-f88e-4230-8b93-5507e68b11e5', '', '2020-11-20', NULL, 'a', 0, 18, 0),
+	('28044a54-f88e-4230-8b93-5507e68b11e5', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.', '2020-11-20', NULL, 'a', 0, 18, 0),
+	('29a367b6-09d2-4e33-a01c-3c906fcf8151', 'hfhrf', '2020-11-22', NULL, '<a href=\'google.com\'>asd</a>', 0, 20, 0),
 	('5344bb84-d774-4cf1-a4a1-966391673a61', 'interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Susp', '2020-11-08', NULL, 'khoa', 0, 12, 0),
 	('5d918a79-b366-4f47-8fb5-9a1b83ba9bd3', 'Sometimes a boy just wants to know wether or not he is loved..... And if  no one tells him..... Things get messy.\r\n', '2020-11-20', NULL, 'Test', 0, 15, 0),
+	('875a5258-1b40-4b8c-ba6a-6675115e0a48', 'edd', '2020-11-22', NULL, '<a href="https://www.w3schools.com">Visit W3Schools.com!</a>', 0, 21, 0),
+	('8ee2dc57-d921-4678-9ed7-8d23446d0abf', '', '2020-11-22', NULL, '<script>alert(\'assssss\')</script>', 0, 22, 0),
 	('bd55bdc4-a66c-4df9-81fb-c60a2446f794', 'This was my dad, I eventually distanced from him, as I got older he would complain that I would not treat him like a father, that\'s because he never treated me like a son.\r\n\r\n', '2020-11-20', NULL, 'abc', 0, 14, 0),
 	('e819ddcc-815c-4ce9-b597-4633cadbf1d8', 'ponent, it\'s marked checked. This method is valid for custom attributesth:attr also. Consider following example:', '2020-11-14', NULL, 'khoatrtrtr', 0, 13, 0),
 	('ec663ca6-0e39-44e0-9a86-43bf6f8efc45', '', '2020-11-20', NULL, 'abc', 0, 19, 1),
@@ -209,14 +219,17 @@ CREATE TABLE IF NOT EXISTS `report_actions` (
 
 -- Dumping structure for table webcaycanh.roles
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.roles: ~0 rows (approximately)
+-- Dumping data for table webcaycanh.roles: ~2 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` (`id`, `description`, `name`) VALUES
+	(1, NULL, 'user'),
+	(2, NULL, 'admin');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Dumping structure for table webcaycanh.saved_posts
@@ -231,17 +244,21 @@ CREATE TABLE IF NOT EXISTS `saved_posts` (
 
 -- Dumping structure for table webcaycanh.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_date` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `is_deleted` bit(1) DEFAULT NULL,
+  `is_deleted` tinyint(4) DEFAULT '0',
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
+  `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table webcaycanh.users: ~0 rows (approximately)
+-- Dumping data for table webcaycanh.users: ~2 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `created_date`, `email`, `is_deleted`, `password`, `username`, `role_id`) VALUES
+	(1, '2020-11-28', 'khoa@gmail.com', 0, '1', NULL, 1),
+	(2, '2020-11-28', 'khoa1@gmail.com', NULL, '1', NULL, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

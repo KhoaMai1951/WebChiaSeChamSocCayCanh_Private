@@ -14,6 +14,7 @@ encoding//src/main/resources/templates/fragment/main-web-fragment/news.html=UTF-
 encoding//src/main/resources/templates/fragment/main-web-fragment/sidebar.html=UTF-8
 encoding//src/main/resources/templates/layout/main-layout.html=UTF-8
 encoding//src/main/resources/templates/main-web/index.html=UTF-8
+encoding//src/main/resources/templates/main-web/v1/detail.html=UTF-8
 encoding//src/main/resources/templates/main-web/v1/login.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

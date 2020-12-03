@@ -16,7 +16,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name = "created_date")
+	@Column(name = "created_date", nullable = true)
 	private Date createdDate;
 
 	@Column(name = "edited_date")

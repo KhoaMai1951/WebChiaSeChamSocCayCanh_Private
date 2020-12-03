@@ -16,7 +16,7 @@
 					<div class="blog-box row">
 						<div class="col-md-4">
 							<div class="post-media">
-								<a th:href="@{|/detail?id=${post.id}|}" title=""> 
+								<a th:href="@{|/post/detail?id=${post.id}|}" title=""> 
 									<img th:src="${post.image.url}" alt=""
 									class="img-fluid">
 									<div class="hovereffect"></div>
@@ -33,7 +33,7 @@
 								</span>
 							</th:block>
 							<h4>
-								<a th:href="@{|/detail?id=${post.id}|}" data-th-text="${post.title}"></a>
+								<a th:href="@{|/post/detail?id=${post.id}|}" data-th-text="${post.title}"></a>
 							</h4>
 							<p style="overflow: hidden; max-height: 12ch;"
 								data-th-text="${post.content}"></p>

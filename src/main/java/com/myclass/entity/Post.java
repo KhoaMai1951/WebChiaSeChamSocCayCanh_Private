@@ -51,9 +51,8 @@ public class Post {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
-	@OneToMany
+	@OneToMany(mappedBy="post")
     private List<Comment> comments;
-	
 	
 
 	public List<Comment> getComments() {

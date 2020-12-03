@@ -39,7 +39,7 @@ public class User {
 	@JoinColumn(name = "role_id")  
 	private Role role; 
 	
-	@OneToMany
+	@OneToMany(mappedBy="user")
     private List<Comment> comments;
 
 	public List<Comment> getComments() {
