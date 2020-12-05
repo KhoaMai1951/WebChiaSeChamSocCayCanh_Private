@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section class="col-lg-9" layout:fragment="content">
+		<div>
+			<p th:utext="${user.username}"></p>
+		</div>
+
+
+		
+		<ul class="nav nav-tabs" id="myTab" data-tabs="tabs">
+			<li class="active"><a data-toggle="tab" href="#MSV">Bài viết của bạn</a></li>
+			<li><a data-toggle="tab" href="#HOF">Bài viết bạn đã comment</a></li>
+			<li><a data-toggle="tab" href="#TOES">Bài viết bạn đã lưu</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="MSV">
+				a
+			</div>
+			<div class="tab-pane" id="HOF">
+				b
+			</div>
+			<div class="tab-pane" id="TOES">
+				c
+			</div>
+		</div>
+		
+		
+		
+		<script>
+			$('#myTab a').click(function(e) {
+				e.preventDefault();
+				$(this).tab('show');
+			})
+		</script>
+	</section>
+
+</body>
+</html>

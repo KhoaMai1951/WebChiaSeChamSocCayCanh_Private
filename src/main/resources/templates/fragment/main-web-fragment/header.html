@@ -47,10 +47,16 @@
 						<a class="mr-3" data-toggle="collapse" href="#collapseExample"
 							aria-expanded="false" aria-controls="collapseExample"><i
 							class="fa fa-search "></i> Search</a> 
-						<a th:if="${session.userId == null}" th:href="@{/user/login}" aria-expanded="false"
-							aria-controls="collapseExample">Login</a>
-						<a th:if="${session.userId != null}" th:href="@{/user/logout}" aria-expanded="false"
-							aria-controls="collapseExample">Logout</a>
+						<a
+							th:if="${session.userId == null}" th:href="@{/user/login}"
+							aria-expanded="false" aria-controls="collapseExample">Login</a> 
+						<a
+							class="mr-3"
+							th:if="${session.userId != null}" th:href="@{/user/logout}"
+							aria-expanded="false" aria-controls="collapseExample">Logout</a>
+						<a
+							th:if="${session.userId != null}" th:href="@{|/user/detail?id=${session.userId}|}"
+							aria-expanded="false" aria-controls="collapseExample">User</a>
 					</div>
 					<!-- end search -->
 				</div>
@@ -68,7 +74,7 @@
 				<div class="col-md-12">
 					<div class="logo">
 						<a th:href="@{|/|}"><img
-							src="../main-web/images/version/garden-logo.png" alt=""></a>
+							src="../../main-web/images/version/garden-logo.png" alt=""></a>
 					</div>
 					<!-- end logo -->
 				</div>

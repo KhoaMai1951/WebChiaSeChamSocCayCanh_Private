@@ -49,11 +49,29 @@ public class FrontPageController {
 	}
 
 	@GetMapping(path = "/post/detail")
-	String detail(Model model, @RequestParam(defaultValue = "id") String id) {
-		model.addAttribute("post", this.postService.findById(id));
-		model.addAttribute("comment", new Comment());
-		model.addAttribute("comments", commentService.findAll());
-		return "main-web/v1/detail.html";
+	String postDetail(Model model, @RequestParam(defaultValue = "id") String id) {
+		Post post = this.postService.findById(id);
+		model.addAttribute("post", post);
+		model.addAttribute("comment", new Comment()); 
+		model.addAttribute("comments", post.getComments());
+		return "main-web/v1/post-detail.html";
+	}
+	
+	@GetMapping(path = "/user/detail")
+	String userDetail(Model model, @RequestParam(defaultValue = "id") String id) {
+		User user = this.userService.findById(Integer.parseInt(id));
+		
+		model.addAttribute("user", user);
+		return "main-web/v1/user-detail.html";
+	}
+	
+	
+	@GetMapping(path = "/user/post/add")
+	String add(Model model) {
+		model.addAttribute("post", new Post());
+		model.addAttribute("plantCategories", categoryService.findByCategoryTypeId(1));
+		model.addAttribute("contentCategories", categoryService.findByCategoryTypeId(2));
+		return "main-web/v1/add.html";
 	}
 	
 	@PostMapping(path = "/user-action/submit-comment")
@@ -73,7 +91,7 @@ public class FrontPageController {
 				comment.setUser(user);
 				commentRepo.save(comment);
 			}
-		}
-		return "redirect:/";
+		} 
+		return "redirect:/post/detail?id="+postId;
 	}
 }

@@ -23,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.myclass.constant.PathConstant;
 import com.myclass.entity.Category;
+import com.myclass.entity.Comment;
 import com.myclass.entity.Post;
 import com.myclass.service.CategoryService;
+import com.myclass.service.CommentService;
 import com.myclass.service.PostService;
 
 @Controller
@@ -35,6 +37,9 @@ public class AdminNewsController {
 
 	@Autowired
 	PostService postService;
+	
+	@Autowired
+	CommentService commentService;
 
 	// news management page
 	@GetMapping(path = "")
@@ -97,7 +102,9 @@ public class AdminNewsController {
 	// show detail news page
 	@GetMapping(path = "/detail")
 	String detail(@RequestParam String id, Model model) {
-		model.addAttribute("post", postService.findById(id));
+		Post post = this.postService.findById(id);
+		model.addAttribute("post", post); 
+		model.addAttribute("comments", post.getComments());
 		return "admin-page/v1/news/detail";
 	}
 }
