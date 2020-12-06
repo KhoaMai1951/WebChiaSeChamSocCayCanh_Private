@@ -15,19 +15,24 @@
 
 
 		
-		<ul class="nav nav-tabs" id="myTab" data-tabs="tabs">
-			<li class="active"><a data-toggle="tab" href="#MSV">Bài viết của bạn</a></li>
-			<li><a data-toggle="tab" href="#HOF">Bài viết bạn đã comment</a></li>
-			<li><a data-toggle="tab" href="#TOES">Bài viết bạn đã lưu</a></li>
+		<ul class="nav nav-tabs" id="myTab" data-tabs="tabs"> 
+			<li class="active"><a data-toggle="tab" href="#1">Bài viết</a></li>
+			<li th:if="${#strings.toString(session.userId) == param.id[0] }"><a data-toggle="tab" href="#2">Bài viết bạn đã comment</a></li>
+			
+			<li th:if="${#strings.toString(session.userId) == param.id[0] }"><a data-toggle="tab" href="#3">Bài viết bạn đã lưu</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane active" id="MSV">
-				a
+			<div class="tab-pane active" id="1">
+				<!-- Post list -->
+				<th:block
+					th:replace="./fragment/main-web-fragment/post-list.html :: post-list"></th:block>
 			</div>
-			<div class="tab-pane" id="HOF">
-				b
+			<div th:if="${(#strings.toString(session.userId) == param.id[0])}"  class="tab-pane" id="2">
+				<!-- Post list by user comment-->
+				<th:block
+					th:replace="./fragment/main-web-fragment/post-by-comment-list.html :: post-by-comment-list"></th:block>
 			</div>
-			<div class="tab-pane" id="TOES">
+			<div th:if="${#strings.toString(session.userId) == param.id[0] }" class="tab-pane" id="3">
 				c
 			</div>
 		</div>

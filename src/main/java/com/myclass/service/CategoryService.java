@@ -21,6 +21,11 @@ public class CategoryService {
 		return this.categoryRepo.findByCategoryTypeId(id);
 	}
 	
+	public List<Category> findAll()
+	{
+		return this.categoryRepo.findAll();
+	}
+	
 	public Category findById(int id)
 	{
 		return this.categoryRepo.findById(id).orElse(null);

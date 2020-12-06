@@ -1,6 +1,7 @@
 package com.myclass.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.mapping.Collection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 //			+ "WHERE category_type_id = :category_type_id "
 //			+ "AND is_deleted = 0", nativeQuery = true)
 //	ArrayList<Category> findByPostId(@Param("category_type_id") Integer postId);
+	
+	
+	@Query(value = "SELECT * FROM categories WHERE is_deleted = 0", nativeQuery = true)
+	List<Category> findAll();
 }

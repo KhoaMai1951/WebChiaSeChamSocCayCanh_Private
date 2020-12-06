@@ -26,7 +26,7 @@ public class UserLoginFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		HttpServletResponse httpResponse = (HttpServletResponse) response; 
 
-		if (url.contains("/user/post/add")) {
+		if (url.contains("/user/post/add")) { 
 			if (session.getAttribute(UserConstant.USER_ID) != null) {
 				chain.doFilter(request, response);
 			}

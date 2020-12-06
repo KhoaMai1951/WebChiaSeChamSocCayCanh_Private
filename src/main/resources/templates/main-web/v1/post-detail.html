@@ -19,10 +19,12 @@
 				<h3 data-th-text="${post.title}"></h3>
 
 				<div class="blog-meta big-meta">
-					<small><a href="garden-single.html" title="">21 July,
-							2017</a></small> <small><a href="blog-author.html" title="">by
-							Jessica</a></small> <small><a href="#" title=""><i
-							class="fa fa-eye"></i> 2344</a></small>
+					<small>
+						<a data-th-text="${post.createdDate}" href="garden-single.html" title="">21 July, 2017</a>
+					</small> 
+					<small>
+						By <a data-th-text="${user.username}" th:href="@{|/user/detail?id=${user.id}|}" title=""></a>
+					</small>  
 				</div>
 				<!-- end meta -->
 			</div>

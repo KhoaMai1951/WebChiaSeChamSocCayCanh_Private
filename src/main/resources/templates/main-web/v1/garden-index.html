@@ -12,46 +12,9 @@
 			th:replace="./fragment/main-web-fragment/first-section.html :: first-section"></th:block>
 		<div class="page-wrapper">
 			<div class="blog-list clearfix">
-				<th:block th:each="post : ${posts}">
-					<div class="blog-box row">
-						<div class="col-md-4">
-							<div class="post-media">
-								<a th:href="@{|/post/detail?id=${post.id}|}" title=""> 
-									<img th:src="${post.image.url}" alt=""
-									class="img-fluid">
-									<div class="hovereffect"></div>
-								</a>
-							</div>
-							<!-- end media -->
-						</div>
-						<!-- end col -->
-
-						<div class="blog-meta big-meta col-md-8">
-							<th:block th:each="category : ${post.categories}">
-								<span class="bg-aqua mr-1"> <a
-									data-th-text="${category.name}" href="#"> </a>
-								</span>
-							</th:block>
-							<h4>
-								<a th:href="@{|/post/detail?id=${post.id}|}" data-th-text="${post.title}"></a>
-							</h4>
-							<p style="overflow: hidden; max-height: 12ch;"
-								data-th-text="${post.content}"></p>
-							<p>...</p>
-							<p style="overflow: hidden; max-height: 12ch;"
-								data-th-text="${post.createdDate}"></p>
-
-							<a href="#" title="">by Matilda</a>
-						</div>
-						<!-- end meta -->
-					</div>
-					<!-- end blog-box -->
-
-					<hr class="invis">
-				</th:block>
-
-
-
+				<!-- Post list -->
+				<th:block
+					th:replace="./fragment/main-web-fragment/post-list.html :: post-list"></th:block>
 
 				<div class="row">
 					<div class="col-md-12">

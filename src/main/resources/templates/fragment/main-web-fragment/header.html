@@ -46,16 +46,14 @@
 					<div class="topsearch text-right">
 						<a class="mr-3" data-toggle="collapse" href="#collapseExample"
 							aria-expanded="false" aria-controls="collapseExample"><i
-							class="fa fa-search "></i> Search</a> 
-						<a
+							class="fa fa-search "></i> Search</a> <a
 							th:if="${session.userId == null}" th:href="@{/user/login}"
-							aria-expanded="false" aria-controls="collapseExample">Login</a> 
-						<a
-							class="mr-3"
-							th:if="${session.userId != null}" th:href="@{/user/logout}"
-							aria-expanded="false" aria-controls="collapseExample">Logout</a>
-						<a
-							th:if="${session.userId != null}" th:href="@{|/user/detail?id=${session.userId}|}"
+							aria-expanded="false" aria-controls="collapseExample">Login</a> <a
+							class="mr-3" th:if="${session.userId != null}"
+							th:href="@{/user/logout}" aria-expanded="false"
+							aria-controls="collapseExample">Logout</a> <a
+							th:if="${session.userId != null}"
+							th:href="@{|/user/detail?id=${session.userId}|}"
 							aria-expanded="false" aria-controls="collapseExample">User</a>
 					</div>
 					<!-- end search -->
@@ -87,7 +85,8 @@
 
 	<header class="header">
 		<div class="container">
-			<nav class="navbar navbar-inverse navbar-toggleable-md">
+			<nav 
+				class="navbar navbar-toggleable-md">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#Forest Timemenu" aria-controls="Forest Timemenu"
 					aria-expanded="false" aria-label="Toggle navigation">
@@ -96,18 +95,11 @@
 				<div class="collapse navbar-collapse justify-content-md-center"
 					id="Forest Timemenu">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link color-green-hover"
-							href="garden-index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link color-green-hover"
-							href="garden-category.html">Gardening</a></li>
-						<li class="nav-item"><a class="nav-link color-green-hover"
-							href="garden-category.html">Outdoor Living</a></li>
-						<li class="nav-item"><a class="nav-link color-green-hover"
-							href="garden-category.html">Indoor Living</a></li>
-						<li class="nav-item"><a class="nav-link color-green-hover"
-							href="garden-category.html">Shopping Guides</a></li>
-						<li class="nav-item"><a class="nav-link color-green-hover"
-							href="garden-contact.html">Contact</a></li>
+						<th:block th:each="category : ${categoriesGlobal}">
+							<li class="nav-item">
+								<a th:href="@{|/post-by-category?id=${category.id}|}" data-th-text="${category.name}" class="nav-link color-green-hover"></a>
+							</li>
+						</th:block>
 					</ul>
 				</div>
 			</nav>
