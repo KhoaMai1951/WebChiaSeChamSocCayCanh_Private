@@ -29,7 +29,7 @@
 				<p style="overflow: hidden; max-height: 12ch;"
 					data-th-text="${post.createdDate}"></p>
 
-				<a href="#" title="">by Matilda</a>
+				bởi <a th:href="@{|/user/detail?id=${post.user.id}|}" data-th-text="${post.user.username}"></a>
 			</div>
 			<!-- end meta -->
 		</div>

@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myclass.constant.PathConstant;
+import com.myclass.constant.UserConstant;
 import com.myclass.entity.Category;
 import com.myclass.entity.Comment;
 import com.myclass.entity.Post;
@@ -63,8 +65,9 @@ public class AdminNewsController {
 	@PostMapping(path = "/add", consumes = { "multipart/form-data" })
 	String postAddNews(@ModelAttribute Post post, Model model, HttpServletRequest request,
 			@RequestPart("imageUpload") MultipartFile file) throws IOException {
-
-		this.postService.save(post, request, categoryService, file);
+		HttpSession session = request.getSession();
+		int userId = (int) session.getAttribute(UserConstant.USER_ID);
+		this.postService.save(post, userId, request, categoryService, file);
 		return "redirect:";
 	}
 

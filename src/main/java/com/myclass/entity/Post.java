@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,8 +24,8 @@ public class Post {
 	@Id
 	private String id;
 
-	@Column(name = "user_id")
-	private int userId;
+//	@Column(name = "user_id")
+//	private int userId;
 
 	@Column(name = "created_date")
 	private Date createdDate;
@@ -54,6 +55,17 @@ public class Post {
 	@OneToMany(mappedBy="post")
     private List<Comment> comments;
 	
+	@ManyToOne 
+	@JoinColumn(name = "user_id") // thông qua khóa ngoại user_id 
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public List<Comment> getComments() {
 		return comments;
@@ -91,13 +103,13 @@ public class Post {
 		this.id = id;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+//	public int getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(int userId) {
+//		this.userId = userId;
+//	}
 
 	public Date getCreatedDate() {
 		return createdDate;

@@ -46,15 +46,19 @@
 					<div class="topsearch text-right">
 						<a class="mr-3" data-toggle="collapse" href="#collapseExample"
 							aria-expanded="false" aria-controls="collapseExample"><i
-							class="fa fa-search "></i> Search</a> <a
+							class="fa fa-search "></i> Tìm kiếm</a>
+						<a
 							th:if="${session.userId == null}" th:href="@{/user/login}"
-							aria-expanded="false" aria-controls="collapseExample">Login</a> <a
+							aria-expanded="false" aria-controls="collapseExample">Đăng nhập</a>
+						<a
 							class="mr-3" th:if="${session.userId != null}"
 							th:href="@{/user/logout}" aria-expanded="false"
-							aria-controls="collapseExample">Logout</a> <a
+							aria-controls="collapseExample">Đăng xuất</a> 
+						<a
 							th:if="${session.userId != null}"
 							th:href="@{|/user/detail?id=${session.userId}|}"
 							aria-expanded="false" aria-controls="collapseExample">User</a>
+							 
 					</div>
 					<!-- end search -->
 				</div>

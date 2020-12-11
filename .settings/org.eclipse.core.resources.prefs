@@ -11,6 +11,7 @@ encoding//src/main/resources/templates/fragment/admin-page-fragment/sidebar.html
 encoding//src/main/resources/templates/fragment/main-web-fragment/footer.html=UTF-8
 encoding//src/main/resources/templates/fragment/main-web-fragment/header.html=UTF-8
 encoding//src/main/resources/templates/fragment/main-web-fragment/news.html=UTF-8
+encoding//src/main/resources/templates/fragment/main-web-fragment/post-list.html=UTF-8
 encoding//src/main/resources/templates/fragment/main-web-fragment/sidebar.html=UTF-8
 encoding//src/main/resources/templates/layout/main-layout.html=UTF-8
 encoding//src/main/resources/templates/main-web/index.html=UTF-8

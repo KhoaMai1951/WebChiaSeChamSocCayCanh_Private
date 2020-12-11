@@ -197,10 +197,9 @@
 						<form th:action="@{/user-action/submit-comment}"
 							th:object="${comment}" method="POST" class="form-wrapper">
 							<textarea th:field="*{content}" class="form-control"
-								placeholder="Your comment"></textarea>
+								placeholder="Bình luận của bạn"></textarea>
 							<input hidden name="postId" th:value="|${post.id}|"></input>
-							<button type="submit" class="btn btn-primary">Submit
-								Comment</button>
+							<button type="submit" class="btn btn-primary">Gửi</button>
 						</form>
 					</div>
 				</div>

@@ -21,6 +21,7 @@ import com.myclass.constant.PathConstant;
 import com.myclass.entity.Category;
 import com.myclass.entity.Image;
 import com.myclass.entity.Post;
+import com.myclass.entity.User;
 import com.myclass.repository.PostRepository;
 
 @Service
@@ -28,7 +29,9 @@ public class PostService {
 	@Autowired
 	PostRepository postRepo;
 
-	public void save(Post post, 
+	public Post save(
+			Post post, 
+			int userId,
 			HttpServletRequest request, 
 			CategoryService categoryService, 
 			MultipartFile file) throws IOException {
@@ -49,8 +52,12 @@ public class PostService {
 
 		// the rest
 		String postId = UUID.randomUUID().toString();
+		User userTemp = new User();
+		userTemp.setId(userId);
 		post.setId(postId);
 		post.setCreatedDate(new Date(System.currentTimeMillis()));
+		post.setUser(userTemp);
+		
 
 		// create category objects
 		List<String> lst = Collections.list(request.getParameterNames());
@@ -67,7 +74,7 @@ public class PostService {
 
 		post.setCategories(categories);
 
-		this.postRepo.save(post);
+		return this.postRepo.save(post);
 	}
 
 	public List<Post> findAll() {
