@@ -4,7 +4,7 @@
 	xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="ISO-8859-1">
-<title>Trang Admin</title>
+<title>Edit</title>
 
 </head>
 <body>
@@ -23,7 +23,7 @@
 						</div>
 					</div>
 					<div class="card-body">
-						<form th:action="@{/admin/news/add}" th:object="${post}"
+						<form th:action="@{/admin/news/edit}" th:object="${post}"
 							method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="inputName">Tiêu đề</label> <input type="text"
@@ -38,8 +38,10 @@
 								<label for="inputStatus">Tag Cây Cảnh</label>
 								<div class="form-check">
 									<th:block th:each="plantCategory : ${plantCategories}">
-										<input th:value="${plantCategory.name}" th:name="|plantCategory${plantCategory.id}|"
-											type="checkbox" class="form-check-input">
+										<input th:value="${plantCategory.name}"
+											th:name="|plantCategory${plantCategory.id}|" type="checkbox"
+											class="form-check-input"
+											th:id="|plantCategory${plantCategory.id}|">
 										<label th:utext="${plantCategory.name}"
 											style="margin-right: 2rem;" class="form-check-label"
 											for="exampleCheck1"> Check me out </label>
@@ -50,18 +52,46 @@
 								<label for="inputStatus">Tag Nội Dung</label>
 								<div class="form-check">
 									<th:block th:each="contentCategory : ${contentCategories}">
-										<input type="checkbox" class="form-check-input" th:name="|contentCategory${contentCategory.id}|">
+										<input type="checkbox" class="form-check-input"
+											th:name="|contentCategory${contentCategory.id}|"
+											th:id="|contentCategory${contentCategory.id}|">
 										<label th:utext="${contentCategory.name}"
 											style="margin-right: 2rem;" class="form-check-label"
 											for="exampleCheck1"> Check me out </label>
 									</th:block>
 								</div>
 							</div>
+							<script th:inline="javascript">
+								var checkedPlantCategories = /*[[${checkedPlantCategories}]]*/null;
+								var checkedContentCategories = /*[[${checkedContentCategories}]]*/null;
+								if (checkedPlantCategories === null
+										|| checkedContentCategories === null) {
+									console.log("its null");
+								}
+								for (var i = 0; i < checkedPlantCategories.length; i++) {
+									var checkBoxPlant = document
+											.getElementById(checkedPlantCategories[i]);
+									if(checkBoxContent === null) continue;
+									checkBoxPlant.setAttribute("checked", true);
+								}
+								for (var i = 0; i < checkedContentCategories.length; i++) {
+									var checkBoxContent = document
+											.getElementById(checkedContentCategories[i]);
+									if(checkBoxContent === null) continue;
+									checkBoxContent.setAttribute("checked",
+											true);
+								}
+							</script>
 							<div class="form-group">
 								<label for="inputStatus">Upload Hình Ảnh</label>
 								<div>
 									<input name="imageUpload" type="file" accept="image/*">
 								</div>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-info float-left">
+									<i class="fas fa-plus"></i> Sửa
+								</button>
 							</div>
 						</form>
 					</div>
