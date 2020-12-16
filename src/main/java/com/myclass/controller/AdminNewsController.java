@@ -103,48 +103,41 @@ public class AdminNewsController {
 	@GetMapping(path = "/detail")
 	String detail(@RequestParam String id, Model model) {
 		Post post = this.postService.findById(id);
+		 
 		model.addAttribute("post", post);
 		model.addAttribute("comments", post.getComments());
 		return "admin-page/v1/news/detail";
 	}
 
+	// show edit news page
 	@GetMapping(path = "/edit")
 	String edit(@RequestParam String id, Model model) {
 		Post post = this.postService.findById(id);
-		List<Category> listCateOfThePost = post.getCategories();
-		List<Category> listCates = categoryService.findAll();//list full categories
-		//phân loại tag cây cảnh và tag nội dung
-		List<Category> listCateType1 = new ArrayList<Category>();//2 list chứa tất cả category đã đc phân loại
-		List<Category> listCateType2 = new ArrayList<Category>();
-		List<String> listCateOfThePostType1 = new ArrayList<String>();//2 list chứa những check của post
-		List<String> listCateOfThePostType2 = new ArrayList<String>();
-		listCates.forEach(x -> {
-			if (x.getCategoryTypeId() == 1)
-				listCateType1.add(x);
-			else
-				listCateType2.add(x);
-		});
-		listCateOfThePost.forEach(x -> {
-			if (x.getCategoryTypeId() == 1)
-				listCateOfThePostType1.add("plantCategory"+x.getId());
-			else
-				listCateOfThePostType2.add("contentCategory"+x.getId());
-		});
-		model.addAttribute("plantCategories", listCateType1);
-		model.addAttribute("contentCategories", listCateType2);
-		model.addAttribute("checkedPlantCategories", listCateOfThePostType1);
-		model.addAttribute("checkedContentCategories", listCateOfThePostType2);
+		
+		// get current categories of current post 
+		List<Integer> currentCategoryIds = new ArrayList<Integer>();
+		List<Category> categories = post.getCategories();
+		for (Category category : categories) {
+			currentCategoryIds.add(category.getId());
+		} 
+		model.addAttribute("currentCategoryIds", currentCategoryIds);
+		
+		// get all categories by types
+		model.addAttribute("plantCategories", categoryService.findByCategoryTypeId(1));
+		model.addAttribute("contentCategories", categoryService.findByCategoryTypeId(2)); 
+		 
+		// get current post
 		model.addAttribute("post", post);
 		return "admin-page/v1/news/edit";
 	}
+	
+	// handle edit news request
 	@PostMapping(path = "/edit", consumes = { "multipart/form-data" })
 	String edit(@ModelAttribute Post post, Model model, HttpServletRequest request,
 			@RequestPart("imageUpload") MultipartFile file) throws IOException {
 		HttpSession session = request.getSession();
-		System.out.println("get user");
-		int userId = (int) session.getAttribute(UserConstant.USER_ID);
-		System.out.println(userId);
-		this.postService.save(post, userId, request, categoryService, file);
+		
+		 
 		return "redirect:";
 	}
 }

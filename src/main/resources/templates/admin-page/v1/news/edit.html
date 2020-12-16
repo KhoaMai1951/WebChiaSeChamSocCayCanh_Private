@@ -38,7 +38,8 @@
 								<label for="inputStatus">Tag Cây Cảnh</label>
 								<div class="form-check">
 									<th:block th:each="plantCategory : ${plantCategories}">
-										<input th:value="${plantCategory.name}"
+										<input th:checked="${#lists.contains(currentCategoryIds, plantCategory.id)}"
+											th:value="${plantCategory.name}"
 											th:name="|plantCategory${plantCategory.id}|" type="checkbox"
 											class="form-check-input"
 											th:id="|plantCategory${plantCategory.id}|">
@@ -52,7 +53,8 @@
 								<label for="inputStatus">Tag Nội Dung</label>
 								<div class="form-check">
 									<th:block th:each="contentCategory : ${contentCategories}">
-										<input type="checkbox" class="form-check-input"
+										<input th:checked="${#lists.contains(currentCategoryIds, contentCategory.id)}"
+											type="checkbox" class="form-check-input"
 											th:name="|contentCategory${contentCategory.id}|"
 											th:id="|contentCategory${contentCategory.id}|">
 										<label th:utext="${contentCategory.name}"
@@ -61,27 +63,6 @@
 									</th:block>
 								</div>
 							</div>
-							<script th:inline="javascript">
-								var checkedPlantCategories = /*[[${checkedPlantCategories}]]*/null;
-								var checkedContentCategories = /*[[${checkedContentCategories}]]*/null;
-								if (checkedPlantCategories === null
-										|| checkedContentCategories === null) {
-									console.log("its null");
-								}
-								for (var i = 0; i < checkedPlantCategories.length; i++) {
-									var checkBoxPlant = document
-											.getElementById(checkedPlantCategories[i]);
-									if(checkBoxContent === null) continue;
-									checkBoxPlant.setAttribute("checked", true);
-								}
-								for (var i = 0; i < checkedContentCategories.length; i++) {
-									var checkBoxContent = document
-											.getElementById(checkedContentCategories[i]);
-									if(checkBoxContent === null) continue;
-									checkBoxContent.setAttribute("checked",
-											true);
-								}
-							</script>
 							<div class="form-group">
 								<label for="inputStatus">Upload Hình Ảnh</label>
 								<div>
