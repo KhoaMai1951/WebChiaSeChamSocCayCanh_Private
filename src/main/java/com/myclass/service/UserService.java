@@ -40,6 +40,18 @@ public class UserService {
 		return -1;
 	}
 	
+	public int findAdminByEmailAndPassword(User user) {
+		String email = user.getEmail(); 
+		String password = user.getPassword(); 
+		
+		User userTemp = this.userRepository.findAdminIdByEmailAndPassword(email, password);
+		if(userTemp != null)
+		{ 
+			return userTemp.getId();
+		}
+		return -1;
+	}
+	
 	public User findUserByPostId(Post post)
 	{
 		return userRepository.findUserByPostId(post.getId());

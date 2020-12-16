@@ -18,8 +18,28 @@ public interface PostRepository extends JpaRepository<Post, String> {
 	@Query(value = "SELECT * FROM POSTS p WHERE p.is_deleted = 0", nativeQuery = true)
 	List<Post> findAll();
 	
+	@Query(value = "SELECT P.* FROM " + 
+			"posts P INNER JOIN users U " + 
+			"ON P.user_id = U.id AND U.role_id = 1 AND p.is_deleted = 0", nativeQuery = true)
+	List<Post> findAllByAdmin();
+	
+	@Query(value = "SELECT P.* FROM " + 
+			"posts P INNER JOIN users U " + 
+			"ON P.user_id = U.id AND U.role_id = 2 AND p.is_deleted = 0", nativeQuery = true)
+	List<Post> findAllByUser();
+	
 	@Query(value = "SELECT * FROM POSTS p WHERE p.is_deleted = 1", nativeQuery = true)
 	List<Post> findAllDeleted();
+	
+	@Query(value = "SELECT P.* FROM posts P "
+			+ "INNER JOIN users U "
+			+ "ON P.user_id = U.id AND U.role_id = 1 AND p.is_deleted = 1", nativeQuery = true)
+	List<Post> findAllByAdminDeleted();
+	
+	@Query(value = "SELECT P.* FROM posts P "
+			+ "INNER JOIN users U "
+			+ "ON P.user_id = U.id AND U.role_id = 2 AND p.is_deleted = 1", nativeQuery = true)
+	List<Post> findAllByUserDeleted();
 	
 	@Query(value = "SELECT * FROM posts p WHERE p.user_id = :id AND p.is_deleted = 0", nativeQuery = true)
 	List<Post> findAllByUserId(@Param("id") int id);

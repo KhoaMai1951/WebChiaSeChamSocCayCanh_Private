@@ -43,7 +43,7 @@ public class AdminNewsController {
 	// news management page
 	@GetMapping(path = "")
 	String news(Model model) {
-		model.addAttribute("posts", postService.findAll());
+		model.addAttribute("posts", postService.findAllByAdmin());
 
 		return "admin-page/v1/news/index";
 	}
@@ -112,7 +112,7 @@ public class AdminNewsController {
 	// show edit news page
 	@GetMapping(path = "/edit")
 	String edit(@RequestParam String id, Model model) {
-		Post post = this.postService.findById(id);
+		Post post = this.postService.findById(id); System.out.println(post.getId());
 		
 		// get current categories of current post 
 		List<Integer> currentCategoryIds = new ArrayList<Integer>();
@@ -133,10 +133,9 @@ public class AdminNewsController {
 	
 	// handle edit news request
 	@PostMapping(path = "/edit", consumes = { "multipart/form-data" })
-	String edit(@ModelAttribute Post post, Model model, HttpServletRequest request,
-			@RequestPart("imageUpload") MultipartFile file) throws IOException {
-		HttpSession session = request.getSession();
-		
+	String edit(@ModelAttribute Post post, Model model, HttpServletRequest request) throws IOException { 
+		 
+		//this.postService.update(post, request, categoryService);
 		 
 		return "redirect:";
 	}

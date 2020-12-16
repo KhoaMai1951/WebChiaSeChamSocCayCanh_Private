@@ -22,6 +22,7 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 
+	//=====================USER====================
 	// show login page
 	@GetMapping(path = "/user/login")
 	String loginPage(Model model) {
@@ -46,5 +47,32 @@ public class LoginController {
 			session.setAttribute(UserConstant.USER_ID, userId);
 		}
 		return "redirect:/";
+	}
+	
+	//=======================ADMIN==================
+	// show login page
+	@GetMapping(path = "/ad-login")
+	String adminLoginPage(Model model) {
+		model.addAttribute("user", new User());
+		return "admin-page/v1/login.html";
+	}
+	
+	@PostMapping("/ad-login")
+	String adminLogin(Model model, @ModelAttribute User user, HttpServletRequest request) {
+		System.out.println(88888888);
+		// check user credential
+		int userId = userService.findAdminByEmailAndPassword(user);
+		if (userId > 0) { 
+			HttpSession session = request.getSession();
+			session.setAttribute(UserConstant.ADMIN_ID, userId);
+		}
+		return "redirect:/admin/news";
+	}
+	
+	// admin logout
+	@GetMapping(path = "/admin/logout")
+	String adminLogout(HttpSession session) {
+		session.removeAttribute(UserConstant.ADMIN_ID);
+		return "redirect:/admin/news";
 	}
 }

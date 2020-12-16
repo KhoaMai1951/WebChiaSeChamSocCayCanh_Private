@@ -76,9 +76,46 @@ public class PostService {
 
 		return this.postRepo.save(post);
 	}
+	
+	public Post update(
+			Post post,  
+			HttpServletRequest request, 
+			CategoryService categoryService ) throws IOException {
+ 
+
+		// the rest
+		
+		 
+		
+
+		// create category objects
+		List<String> lst = Collections.list(request.getParameterNames());
+		List<Category> categories = new ArrayList<Category>();
+		lst.forEach(x -> {
+			if (x.contains("plantCategory")) {
+				int id = Integer.parseInt(x.substring("plantCategory".length()));
+				categories.add(categoryService.findById(id));
+			} else if (x.contains("contentCategory")) {
+				int id = Integer.parseInt(x.substring("contentCategory".length()));
+				categories.add(categoryService.findById(id));
+			}
+		});
+
+		post.setCategories(categories);
+
+		return this.postRepo.save(post);
+	}
 
 	public List<Post> findAll() {
 		return postRepo.findAll();
+	}
+	
+	public List<Post> findAllByAdmin() {
+		return postRepo.findAllByAdmin();
+	}
+	
+	public List<Post> findAllByUser() {
+		return postRepo.findAllByUser();
 	}
 	
 	public List<Post> findAllDeleted() {
