@@ -134,8 +134,8 @@ public class AdminNewsController {
 	// handle edit news request
 	@PostMapping(path = "/edit", consumes = { "multipart/form-data" })
 	String edit(@ModelAttribute Post post, Model model, HttpServletRequest request) throws IOException { 
-		 
-		//this.postService.update(post, request, categoryService);
+		
+		this.postService.update(post, request, categoryService);
 		 
 		return "redirect:";
 	}

@@ -81,14 +81,15 @@ public class PostService {
 			Post post,  
 			HttpServletRequest request, 
 			CategoryService categoryService ) throws IOException {
- 
+  
+		// get object by id
+		Post postTemp = this.findById(post.getId());
 
-		// the rest
-		
-		 
-		
+		// set new title and content
+		postTemp.setTitle(post.getTitle());
+		postTemp.setContent(post.getContent());
 
-		// create category objects
+		// set new categories
 		List<String> lst = Collections.list(request.getParameterNames());
 		List<Category> categories = new ArrayList<Category>();
 		lst.forEach(x -> {
@@ -100,10 +101,10 @@ public class PostService {
 				categories.add(categoryService.findById(id));
 			}
 		});
+		postTemp.setCategories(categories);
 
-		post.setCategories(categories);
-
-		return this.postRepo.save(post);
+		// update
+		return this.postRepo.save(postTemp);
 	}
 
 	public List<Post> findAll() {

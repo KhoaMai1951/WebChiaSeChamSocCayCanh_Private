@@ -25,6 +25,8 @@
 					<div class="card-body">
 						<form th:action="@{/admin/news/edit}" th:object="${post}"
 							method="POST" enctype="multipart/form-data">
+							<input type="text" hidden
+									th:field="*{id}" class="form-control">
 							<div class="form-group">
 								<label for="inputName">Tiêu đề</label> <input type="text"
 									th:field="*{title}" class="form-control">
