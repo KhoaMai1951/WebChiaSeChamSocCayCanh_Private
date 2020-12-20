@@ -26,13 +26,18 @@ public class AdminLoginFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		HttpServletResponse httpResponse = (HttpServletResponse) response; 
 
+		// if url has 'admin' in the link
 		if (url.contains("/admin")) { 
+			// if session has ADMIN_ID attribute with value
+			// then continue
 			if (session.getAttribute(UserConstant.ADMIN_ID) != null) {
 				chain.doFilter(request, response);
 			}
+			// else redirect to admin login page
 			else httpResponse.sendRedirect("/ad-login");
 				
 		} 
+		// if url doesn't have 'admin' in the link, proceed as normal
 		else chain.doFilter(request, response);
 	}
 

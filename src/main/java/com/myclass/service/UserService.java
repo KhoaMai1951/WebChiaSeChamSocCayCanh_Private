@@ -1,6 +1,8 @@
 package com.myclass.service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.myclass.entity.Post;
 import com.myclass.entity.User;
 import com.myclass.repository.PostRepository;
+import com.myclass.repository.RoleRepository;
 import com.myclass.repository.UserRepository;
 
 @Service
@@ -19,9 +22,12 @@ public class UserService {
 	
 	@Autowired
 	PostRepository postRepo;
+	
+	@Autowired
+	RoleRepository roleRepository;
 
-	public ArrayList<User> findAll() {
-		return (ArrayList<User>) userRepository.findAll();
+	public List<User> findAll() {
+		return (List<User>) userRepository.findAll();
 	}
 
 	public User findById(int id) {
@@ -57,4 +63,21 @@ public class UserService {
 		return userRepository.findUserByPostId(post.getId());
 	}
 
+	public boolean save(User u, int roleId)   
+	{
+		User uTemp = new User();
+		uTemp.setEmail(u.getEmail());
+		uTemp.setPassword(u.getPassword());
+		uTemp.setUsername(u.getUsername());
+		uTemp.setRole(this.roleRepository.findById(roleId));
+ 
+
+		try { 
+			this.userRepository.save(uTemp);
+		} 
+		catch(javax.persistence.RollbackException e) { 
+		    
+		} 
+		return false;
+	}
 }

@@ -119,8 +119,12 @@ public class PostService {
 		return postRepo.findAllByUser();
 	}
 	
-	public List<Post> findAllDeleted() {
-		return postRepo.findAllDeleted();
+	public List<Post> findAllNewsDeleted() {
+		return postRepo.findAllNewsDeleted();
+	}
+	
+	public List<Post> findAllPostsDeleted() {
+		return postRepo.findAllPostsDeleted();
 	}
 	
 	public List<Post> findAllByUserId(int id) {
@@ -142,6 +146,10 @@ public class PostService {
 	
 	public void softDelete(String id) {
 		postRepo.softDelete(id);
+	}
+	
+	public void deleteById(String id) {
+		postRepo.deleteById(id);
 	}
 	
 	public void restore(String id) {

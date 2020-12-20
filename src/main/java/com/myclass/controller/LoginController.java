@@ -41,6 +41,7 @@ public class LoginController {
 	String login(Model model, @ModelAttribute User user, HttpServletRequest request) {
 
 		// check user credential
+		// only find user account
 		int userId = userService.findUserByEmailAndPassword(user);
 		if (userId > 0) {
 			HttpSession session = request.getSession();
@@ -57,10 +58,11 @@ public class LoginController {
 		return "admin-page/v1/login.html";
 	}
 	
+	// login
 	@PostMapping("/ad-login")
-	String adminLogin(Model model, @ModelAttribute User user, HttpServletRequest request) {
-		System.out.println(88888888);
+	String adminLogin(Model model, @ModelAttribute User user, HttpServletRequest request) { 
 		// check user credential
+		// only find admin account
 		int userId = userService.findAdminByEmailAndPassword(user);
 		if (userId > 0) { 
 			HttpSession session = request.getSession();

@@ -22,32 +22,35 @@
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
-		
+
 			<!--  POSTS -->
 			<ul class="nav nav-pills nav-sidebar flex-column"
 				data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library --> 
+               with font-awesome or any other icon font library -->
 				<li
 					th:classappend="
 						${#httpServletRequest.requestURI.contains('news') ? ' menu-open':'' }"
-					class="nav-item has-treeview"><a href="#"
-					class="nav-link active"> <i
-						class="nav-icon fas fa-tachometer-alt"></i>
-						<p>
-							Bài viết <i class="right fas fa-angle-left"></i>
-						</p>
-				</a>
+					class="nav-item has-treeview">
+						<a href="#" class="nav-link active"> 
+							<i class="nav-icon fas fa-tachometer-alt"></i>
+							<p>
+								Bài viết <i class="right fas fa-angle-left"></i>
+							</p>
+						</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a th:href="@{/admin/news}"
+						<li class="nav-item">
+						<a th:href="@{/admin/news}"
 							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/news' ? 'active':''}"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Tin tức</p>
-						</a> <a th:href="@{/admin/news/add}"
+						</a> 
+						<a th:href="@{/admin/news/add}"
 							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/news/add' ? 'active':''}"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Thêm tin tức</p>
-						</a> <a th:href="@{/admin/news/deleted}"
+						</a> 
+						<a th:href="@{/admin/news/deleted}"
 							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/news/deleted' ? 'active':''}"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Khôi phục tin tức</p>
@@ -62,7 +65,7 @@
 				data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li 
+				<li
 					th:classappend="
 						${#httpServletRequest.requestURI.contains('user') ? ' menu-open':'' }"
 					class="nav-item has-treeview"><a href="#"
@@ -73,19 +76,36 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a th:href="@{/admin/users}"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/users' ? 'active':''}"
+					<li class="nav-item">
+						<a th:href="@{/admin/user/posts}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/posts' ? 'active':''}"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Danh sách</p>
-						</a> <a th:href="@{/admin/users/add}"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/users/add' ? 'active':''}"
+								<p>Bài viết</p>
+						</a> 
+						<a th:href="@{/admin/user/posts/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/posts/deleted' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Khôi phục bài viết</p>
+						</a>
+						
+						<hr class="solid">
+						 
+						<a th:href="@{/admin/user/list}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/list' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Danh sách người dùng</p>
+						</a> 
+						<a th:href="@{/admin/user/add}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/add' ? 'active':''}"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Thêm người dùng</p>
-						</a> <a th:href="@{/admin/users/deleted}"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/users/deleted' ? 'active':''}"
+						</a> 
+						<a th:href="@{/admin/user/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/deleted' ? 'active':''}"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Khôi phục người dùng</p>
-						</a></li>
+						</a>
+					</li>
 					</ul></li>
 
 			</ul>

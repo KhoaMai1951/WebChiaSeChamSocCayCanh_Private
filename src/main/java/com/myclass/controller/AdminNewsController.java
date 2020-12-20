@@ -83,6 +83,13 @@ public class AdminNewsController {
 		this.postService.softDelete(id);
 		return "redirect:/admin/news";
 	}
+	
+	// delete
+	@GetMapping(path = "/delete")
+	String delete(@RequestParam String id) {
+		this.postService.deleteById(id);
+		return "redirect:/admin/news";
+	}
 
 	// restore news
 	@GetMapping(path = "/restore")
@@ -95,13 +102,13 @@ public class AdminNewsController {
 	@GetMapping(path = "/deleted")
 	String restoreNewsPage(Model model) {
 
-		model.addAttribute("posts", postService.findAllDeleted());
+		model.addAttribute("posts", postService.findAllNewsDeleted());
 		return "admin-page/v1/news/deleted";
 	}
 
 	// show detail news page
 	@GetMapping(path = "/detail")
-	String detail(@RequestParam String id, Model model) {
+	String detail(@RequestParam String id, Model model) { 
 		Post post = this.postService.findById(id);
 		 
 		model.addAttribute("post", post);
@@ -112,7 +119,7 @@ public class AdminNewsController {
 	// show edit news page
 	@GetMapping(path = "/edit")
 	String edit(@RequestParam String id, Model model) {
-		Post post = this.postService.findById(id); System.out.println(post.getId());
+		Post post = this.postService.findById(id); 
 		
 		// get current categories of current post 
 		List<Integer> currentCategoryIds = new ArrayList<Integer>();

@@ -14,9 +14,9 @@
 				<div class="row">
 					<h1>Bài viết đã xóa</h1>
 					<div class="col-lg-12">
-						<a th:href="@{/admin/news}" type="button"
+						<a th:href="@{/admin/user/posts}" type="button"
 							class="btn btn-info float-left"> <i class="fas fa-arrow-left"></i>
-							Quay lại danh sách tin tức của admin
+							Quay lại trang danh sách bài viết
 						</a>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 				<!-- Default box -->
 				<div class="col-lg-12 card" style="margin-top: 1rem;">
 					<div class="card-header">
-						<h3 class="card-title">Tin tức</h3>
+						<h3 class="card-title">Bài viết đã xóa</h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool"
@@ -43,10 +43,10 @@
 							<thead>
 								<tr>
 									<th style="width: 1%">STT</th>
-									<th style="width: 20%">Tiêu đề</th>
+									<th style="width: 20%">Tiêu đề</th>
 									<th style="width: 30%">Nội dung</th>
 									<th>Người viết</th>
-									<th style="width: 8%" class="text-center">Hình ảnh</th>
+									<th style="width: 8%" class="text-center">Hành động</th>
 									<th style="width: 20%"></th>
 								</tr>
 							</thead>
@@ -60,11 +60,11 @@
 										<td><img alt="Avatar" class="table-avatar"
 											th:src="${post.image.url}"></td>
 										<td class="project-actions text-right"><a
-											class="btn btn-primary btn-sm" th:href="@{|/admin/news/restore?id=${post.id}|}"> <i
+											class="btn btn-primary btn-sm" th:href="@{|/admin/user/posts/restore?id=${post.id}|}"> <i
 												class="fas fa-folder"> </i> Khôi phục
 										</a> <a class="btn btn-danger btn-sm"
-											onclick="return confirm('Bạn có chắc muốn xóa?')" 
-											th:href="@{|/admin/news/delete?id=${post.id}|}">
+											onclick="return confirm('Bạn muốn xóa hẳn bài viết?')" 
+											th:href="@{|/admin/user/posts/delete?id=${post.id}|}">
 												<i class="fas fa-folder"> </i> Xóa hẳn
 										</a></td>
 									</tr>

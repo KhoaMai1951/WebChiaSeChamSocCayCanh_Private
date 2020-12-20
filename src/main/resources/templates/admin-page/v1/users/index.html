@@ -11,25 +11,25 @@
 	<section layout:fragment="content">
 		<div class="content-wrapper">
 			<div id="main-content" class="container">
-				<h1> Tin tức của Admin </h1>
-				<div class="row">
-					<div class="col-lg-12">
-						<a th:href="@{/admin/news/add}" type="button"
-							class="btn btn-info float-left"> <i class="fas fa-plus"></i>
-							Viết tin tức
+				<h1> Danh sách người dùng </h1>
+				<div class="row"> 
+					<div class="col-lg-12" style="margin-top: 1rem;">
+						<a th:href="@{/admin/user/add}" type="button"
+							class="btn btn-primary float-left"> <i class="fas fa-plus"></i>
+							Thêm người dùng
 						</a>
 					</div>
 					<div class="col-lg-12" style="margin-top: 1rem;">
-						<a th:href="@{/admin/news/deleted}" type="button"
+						<a th:href="@{/admin/user/deleted}" type="button"
 							class="btn btn-warning float-left"> <i class="fas fa-trash-restore"></i>
-							Khôi phục tin tức
+							Khôi phục người dùng
 						</a>
 					</div>
 
 					<!-- Default box -->
 					<div class="col-lg-12 card" style="margin-top: 1rem;">
 						<div class="card-header">
-							<h3 class="card-title">Tin tức</h3>
+							<h3 class="card-title">Người dùng</h3>
 
 							<div class="card-tools">
 								<button type="button" class="btn btn-tool"
@@ -47,34 +47,25 @@
 							<table class="table table-striped projects">
 								<thead>
 									<tr>
-										<th style="width: 1%">STT</th>
-										<th style="width: 20%">Tiêu đề</th>
-										<th style="width: 30%">Nội dung</th>
-										<th>Người viết</th>
-										<th style="width: 8%" class="text-center">Hình ảnh</th>
-										<th style="width: 20%"></th>
+										<th  >STT</th> 
+										<th  >Username</th>
+										<th  >Email</th>
+										<th>Vai trò</th>
+										<th>Hành động</th>
 									</tr>
 								</thead>
 								<tbody>
-									<th:block th:each="post, custStat : ${posts}">
+									<th:block th:each="user, custStat : ${users}">
 										<tr>
 											<td data-th-text="${custStat.count}">#</td>
-											<td data-th-text="${post.title}"><input></td>
+											<td data-th-text="${user.username}"><input></td>
+											<td data-th-text="${user.email}"> </td>
+											<td><span data-th-text="${user.role.name}" class="badge badge-danger"></span></td> 
 											<td>
-												<p style="text-overflow: ellipsis; width:20rem;
-												overflow: hidden; white-space: nowrap;" data-th-text="${post.content}"></p>
-											</td>
-											<td data-th-text="${post.user.username}"></td>
-											<td><img alt="Avatar" class="table-avatar"
-												th:src="${post.image.url}"></td>
-											<td class="project-actions text-right"><a
-												class="btn btn-primary btn-sm" th:href="@{|/admin/news/detail?id=${post.id}|}"> <i
-													class="fas fa-folder"> </i> Xem
-											</a> <a class="btn btn-info btn-sm"
-												th:href="@{|/admin/news/edit?id=${post.id}|}"> <i
-													class="fas fa-pencil-alt"> </i> Chỉnh sửa
-											</a> <a class="btn btn-danger btn-sm"
-												th:href="@{|/admin/news/soft-delete?id=${post.id}|}"> <i
+												<a class="btn btn-primary btn-sm" th:href="@{|/admin/user/detail?id=${user.id}|}"> <i
+													class="fas fa-folder"> </i> Xem </a>   
+												<a class="btn btn-danger btn-sm"
+													th:href="@{|/admin/user/soft-delete?id=${user.id}|}"> <i
 													class="fas fa-trash"> </i> Xóa
 											</a></td>
 										</tr>

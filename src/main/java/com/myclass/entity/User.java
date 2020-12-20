@@ -2,8 +2,7 @@ package com.myclass.entity;
 
 import java.sql.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
+ 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull; 
+
+ 
 
 @Entity(name = "users")
 public class User {
@@ -19,10 +21,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@NotNull
 	private String username;
 
+	@NotNull
 	private String email;
 
+	@NotNull
 	private String password;
 
 	@Column(name = "is_deleted")
