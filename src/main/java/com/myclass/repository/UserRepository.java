@@ -2,7 +2,10 @@ package com.myclass.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,11 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 			"SELECT * FROM users u  " + 
 			"WHERE u.is_deleted = 0", nativeQuery = true)
 	public List<User> findAll();
+	
+	@Query(value = 
+			"SELECT * FROM users u  " + 
+			"WHERE u.is_deleted = 1", nativeQuery = true)
+	public List<User> findAllDeleted();
 	
 	@Query(value = "SELECT * FROM users u WHERE u.is_deleted = 0 AND u.email = :email AND u.password = :password", nativeQuery = true)
 	public User findUserIdByEmailAndPassword(@Param("email") String email, @Param("password") String password);
@@ -51,4 +59,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 			"SELECT * FROM users u  " + 
 			"WHERE u.role_id = 1 AND u.is_deleted = 1", nativeQuery = true)
 	public List<User> findAllDeletedAdmins();
+	
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(value = "UPDATE USERS u SET u.is_deleted = 1 WHERE u.id = :id", nativeQuery = true)
+	void softDelete(@Param("id") int id);
 }

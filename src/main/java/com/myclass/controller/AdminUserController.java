@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 
+import com.myclass.constant.UserConstant;
 import com.myclass.entity.User;
 import com.myclass.service.CategoryService;
 import com.myclass.service.CommentService;
@@ -68,7 +69,7 @@ public class AdminUserController {
 
 	// soft delete
 	@GetMapping(path = "/posts/soft-delete")
-	String softDelete(@RequestParam String id) {
+	String softDelete(@RequestParam String id, HttpSession session) {
 		this.postService.softDelete(id);
 		return "redirect:/admin/user/posts";
 	}
@@ -107,38 +108,45 @@ public class AdminUserController {
 	// add user page
 	@GetMapping(path = "/add")
 	String add(Model model, HttpServletRequest request) {
-		// check inform message
-		if (request.getParameterMap().containsKey("success"))
-			model.addAttribute("success", true);
-		if (request.getParameterMap().containsKey("fail"))
-			model.addAttribute("fail", true);
-
-		model.addAttribute("user", new User());
+		if (!model.containsAttribute("user")) {
+			model.addAttribute("user", new User());
+		}
 		model.addAttribute("roles", this.roleService.findAll());
 		return "admin-page/v1/users/add";
 	}
 
 	// add user
 	@PostMapping(path = "/add")
-	ModelAndView addUser(
-			@ModelAttribute @Valid User user, 	// this is the bean
-			BindingResult bindingResult, 		// your BindingResult needs to be placed immediately after the bean
-			Model model,
-			HttpServletRequest request, 
-			RedirectAttributes redirectAttributes) throws IOException {
+	String addUser(@ModelAttribute("user") @Valid User user, // this is the bean
+			BindingResult bindingResult, // your BindingResult needs to be placed immediately after the bean
+			Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {
 
 		if (bindingResult.hasErrors()) {
-			System.out.println("BINDING RESULT ERROR");
-			return new ModelAndView("admin-page/v1/users/add");
+			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
+			redirectAttributes.addFlashAttribute("user", user);
+			return "redirect:/admin/user/add";
+		} else {
+			int roleId = Integer.parseInt((String) request.getParameter("roleId"));
+			this.userService.save(user, roleId);
+			redirectAttributes.addFlashAttribute("success", 1);
+			return "redirect:/admin/user/add";
 		}
-//		int roleId = Integer.parseInt((String) request.getParameter("roleId"));
-//		if(this.userService.save(user, roleId) == true)
-//		{
-//			redirectAttributes.addAttribute("success", true);
-//		}
-//		else redirectAttributes.addAttribute("fail", true);  
-//		//return "redirect:/admin/user/add";
-		return new ModelAndView("redirect:/admin/user/add");
+	}
 
+	// soft delete
+	@GetMapping(path = "/soft-delete")
+	String softDeleteUser(@RequestParam String id, HttpSession session) {
+		int currentId = (Integer) session.getAttribute(UserConstant.ADMIN_ID);
+		int targetId = Integer.parseInt(id);
+		this.userService.softDelete(currentId, targetId);
+		return "redirect:/admin/user/list";
+	}
+
+	// deleted user list page
+	@GetMapping(path = "/deleted")
+	String usersDeleted(Model model) {
+		model.addAttribute("users", userService.findAllDeleted());
+
+		return "admin-page/v1/users/deleted";
 	}
 }

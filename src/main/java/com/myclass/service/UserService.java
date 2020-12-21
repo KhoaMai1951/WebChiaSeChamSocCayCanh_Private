@@ -29,6 +29,10 @@ public class UserService {
 	public List<User> findAll() {
 		return (List<User>) userRepository.findAll();
 	}
+	
+	public List<User> findAllDeleted() {
+		return (List<User>) userRepository.findAllDeleted();
+	}
 
 	public User findById(int id) {
 		return userRepository.findById(id).get();
@@ -79,5 +83,15 @@ public class UserService {
 		    
 		} 
 		return false;
+	}
+	
+	public boolean softDelete(int currentId, int targetId) {
+		// if not delete admin himself
+		if(currentId != targetId)
+		{
+			userRepository.softDelete(targetId);
+			return true;
+		}
+		return false; 
 	}
 }

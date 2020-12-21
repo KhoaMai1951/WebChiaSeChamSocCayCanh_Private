@@ -11,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull; 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements; 
 
  
 
@@ -22,12 +27,17 @@ public class User {
 	private int id;
 
 	@NotNull
+	@Size(min = 4, max = 24)
 	private String username;
 
 	@NotNull
+    @Email  
+    @Column(unique = true)
+	@Size(min = 4, max = 50)
 	private String email;
 
-	@NotNull
+	@NotNull 
+	@Size(min = 4, max = 24)  
 	private String password;
 
 	@Column(name = "is_deleted")
