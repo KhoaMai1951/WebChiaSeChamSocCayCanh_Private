@@ -62,9 +62,14 @@ public class UserController {
 		return "main-web/v1/add.html";
 	}
 
+	// submit comment
 	@PostMapping(path = "/user-action/submit-comment")
-	String submitComment(@ModelAttribute Comment comment, Model model, HttpServletRequest request,
+	String submitComment(
+			@ModelAttribute Comment comment, 
+			Model model, 
+			HttpServletRequest request,
 			@RequestParam("postId") String postId) {
+		
 		HttpSession session = request.getSession();
 		Post post = this.postService.findById(postId);
 		if (session.getAttribute(UserConstant.USER_ID) != null) {

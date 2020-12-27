@@ -98,10 +98,9 @@ public class AdminNewsController {
 		return "redirect:/admin/news/deleted";
 	}
 
-	// show deletes news page
+	// show deleted news page
 	@GetMapping(path = "/deleted")
 	String restoreNewsPage(Model model) {
-
 		model.addAttribute("posts", postService.findAllNewsDeleted());
 		return "admin-page/v1/news/deleted";
 	}

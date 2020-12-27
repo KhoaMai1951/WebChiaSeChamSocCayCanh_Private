@@ -26,6 +26,11 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 			"WHERE u.is_deleted = 1", nativeQuery = true)
 	public List<User> findAllDeleted();
 	
+	@Query(value = 
+			"SELECT * FROM users u  " + 
+			"WHERE u.is_deleted = 1", nativeQuery = true)
+	public List<User> deleteById();
+	
 	@Query(value = "SELECT * FROM users u WHERE u.is_deleted = 0 AND u.email = :email AND u.password = :password", nativeQuery = true)
 	public User findUserIdByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 	
@@ -64,4 +69,20 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Modifying(clearAutomatically = true)
 	@Query(value = "UPDATE USERS u SET u.is_deleted = 1 WHERE u.id = :id", nativeQuery = true)
 	void softDelete(@Param("id") int id);
+	
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(value = "UPDATE USERS u SET u.is_deleted = 0 WHERE u.id = :id", nativeQuery = true)
+	void restore(@Param("id") int id);
+	
+	@Query(value = "SELECT u.email FROM users u WHERE u.email = :email", nativeQuery = true)
+	String findEmail(@Param("email") String email);
+	
+	@Query(value = "SELECT * FROM users u WHERE u.email = :email", nativeQuery = true)
+	User findUserByEmail(@Param("email") String email);
+	
+	@Query(value = "SELECT u.id FROM users u WHERE u.email = :email", nativeQuery = true)
+	int findIdByEmail(@Param("email") String email);
+	
+	
 }

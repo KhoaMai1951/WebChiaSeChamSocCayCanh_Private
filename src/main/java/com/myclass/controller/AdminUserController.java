@@ -121,16 +121,28 @@ public class AdminUserController {
 			BindingResult bindingResult, // your BindingResult needs to be placed immediately after the bean
 			Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {
 
+		// if validation failed
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
 			redirectAttributes.addFlashAttribute("user", user);
 			return "redirect:/admin/user/add";
 		} else {
 			int roleId = Integer.parseInt((String) request.getParameter("roleId"));
-			this.userService.save(user, roleId);
-			redirectAttributes.addFlashAttribute("success", 1);
+			// if save success
+			if(this.userService.save(user, roleId))
+			{
+				redirectAttributes.addFlashAttribute("success", 1);
+			}
+			// save fail
+			else 
+			{
+				redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
+				redirectAttributes.addFlashAttribute("user", user);
+				return "redirect:/admin/user/add";
+			}
 			return "redirect:/admin/user/add";
 		}
+		
 	}
 
 	// soft delete
@@ -148,5 +160,19 @@ public class AdminUserController {
 		model.addAttribute("users", userService.findAllDeleted());
 
 		return "admin-page/v1/users/deleted";
+	}
+
+	// delete user for real
+	@GetMapping(path = "/delete")
+	String deleteUser(@RequestParam String id) {
+		this.userService.deleteById(Integer.parseInt(id));
+		return "redirect:/admin/user/list";
+	}
+	
+	// restore deleted user
+	@GetMapping(path = "/restore")
+	String restoreDeletedUser(@RequestParam String id) {
+		this.userService.restore(Integer.parseInt(id));
+		return "redirect:/admin/user/deleted";
 	}
 }

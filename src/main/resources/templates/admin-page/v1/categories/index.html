@@ -11,19 +11,25 @@
 	<section layout:fragment="content">
 		<div class="content-wrapper">
 			<div id="main-content" class="container">
-				<h1> Danh sách người dùng đã bị xóa</h1>
-				<div class="row">  
+				<h1> Danh sách danh mục </h1>
+				<div class="row"> 
 					<div class="col-lg-12" style="margin-top: 1rem;">
-						<a th:href="@{/admin/user/list}" type="button"
-							class="btn btn-warning float-left"> <i class="fas fa-arrow-left"></i>
-							Quay trở lại trang danh sách người dùng
+						<a th:href="@{/admin/category/add}" type="button"
+							class="btn btn-primary float-left"> <i class="fas fa-plus"></i>
+							Thêm danh mục
+						</a>
+					</div>
+					<div class="col-lg-12" style="margin-top: 1rem;">
+						<a th:href="@{/admin/category/deleted}" type="button"
+							class="btn btn-warning float-left"> <i class="fas fa-trash-restore"></i>
+							Khôi phục danh mục
 						</a>
 					</div>
 
 					<!-- Default box -->
 					<div class="col-lg-12 card" style="margin-top: 1rem;">
 						<div class="card-header">
-							<h3 class="card-title">Người dùng</h3>
+							<h3 class="card-title">Danh mục</h3>
 
 							<div class="card-tools">
 								<button type="button" class="btn btn-tool"
@@ -56,12 +62,11 @@
 											<td data-th-text="${user.email}"> </td>
 											<td><span data-th-text="${user.role.name}" class="badge badge-danger"></span></td> 
 											<td>
-												<a class="btn btn-primary btn-sm" th:href="@{|/admin/user/restore?id=${user.id}|}"> <i
-													class="fas fa-folder"> </i> Khôi phục </a>   
-												<!-- <a class="btn btn-danger btn-sm"
-													onclick="return confirm('Bạn muốn xóa hẳn người dùng này?')"
-													th:href="@{|/admin/user/delete?id=${user.id}|}"> <i
-													class="fas fa-trash"> </i> Xóa hẳn -->
+												<a class="btn btn-primary btn-sm" th:href="@{|/admin/user/detail?id=${user.id}|}"> <i
+													class="fas fa-folder"> </i> Xem </a>   
+												<a class="btn btn-danger btn-sm"
+													th:href="@{|/admin/user/soft-delete?id=${user.id}|}"> <i
+													class="fas fa-trash"> </i> Xóa
 											</a></td>
 										</tr>
 									</th:block>

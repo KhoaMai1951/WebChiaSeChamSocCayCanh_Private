@@ -37,15 +37,15 @@ public class LoginController {
 		return "redirect:/";
 	}
 
+	// login handle
 	@PostMapping(path = "/user/login")
 	String login(Model model, @ModelAttribute User user, HttpServletRequest request) {
 
 		// check user credential
-		// only find user account
-		int userId = userService.findUserByEmailAndPassword(user);
-		if (userId > 0) {
+		// only find user account 
+		if (this.userService.verifyPassword(user)) {
 			HttpSession session = request.getSession();
-			session.setAttribute(UserConstant.USER_ID, userId);
+			session.setAttribute(UserConstant.USER_ID, this.userService.findIdByEmail(user.getEmail()));
 		}
 		return "redirect:/";
 	}
@@ -62,11 +62,10 @@ public class LoginController {
 	@PostMapping("/ad-login")
 	String adminLogin(Model model, @ModelAttribute User user, HttpServletRequest request) { 
 		// check user credential
-		// only find admin account
-		int userId = userService.findAdminByEmailAndPassword(user);
-		if (userId > 0) { 
+		// only find admin account 
+		if (this.userService.verifyPassword(user)) {
 			HttpSession session = request.getSession();
-			session.setAttribute(UserConstant.ADMIN_ID, userId);
+			session.setAttribute(UserConstant.ADMIN_ID, this.userService.findIdByEmail(user.getEmail()));
 		}
 		return "redirect:/admin/news";
 	}
