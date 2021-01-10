@@ -64,12 +64,9 @@ public class UserController {
 
 	// submit comment
 	@PostMapping(path = "/user-action/submit-comment")
-	String submitComment(
-			@ModelAttribute Comment comment, 
-			Model model, 
-			HttpServletRequest request,
+	String submitComment(@ModelAttribute Comment comment, Model model, HttpServletRequest request,
 			@RequestParam("postId") String postId) {
-		
+
 		HttpSession session = request.getSession();
 		Post post = this.postService.findById(postId);
 		if (session.getAttribute(UserConstant.USER_ID) != null) {
@@ -90,16 +87,24 @@ public class UserController {
 			@RequestPart("imageUpload") MultipartFile file) throws IOException {
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute(UserConstant.USER_ID);
-		
-		return "redirect:/post/detail?id=" + this.postService.save(post, userId, request, categoryService, file).getId();
+
+		return "redirect:/post/detail?id="
+				+ this.postService.save(post, userId, request, categoryService, file).getId();
 	}
-	
+
 	// register page
 	@GetMapping(path = "/new-user/register")
 	String registerPage(Model model) {
-		model.addAttribute("user", new User()); 
+		model.addAttribute("user", new User());
 		return "main-web/v1/register.html";
 	}
 
-	
+	// register
+	@PostMapping(path = "/new-user/register")
+	String register(@ModelAttribute User user) { 
+		//....
+		 
+		return "redirect:/";
+	}
+
 }

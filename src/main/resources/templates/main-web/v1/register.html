@@ -12,7 +12,8 @@
 			<div class="alert alert-success" role="alert">
 				<h4 class="alert-heading">Đăng ký thành viên mới</h4> 
 			</div> 
-			<form th:action="@{/user/post/add}" th:object="${user}" method="POST">
+			<!-- FORM -->
+			<form th:action="@{/new-user/register}" th:object="${user}" method="POST">
 				<div class="form-group">
 					<label for="inputName">Username</label> <input type="text"
 						th:field="*{username}" class="form-control">
