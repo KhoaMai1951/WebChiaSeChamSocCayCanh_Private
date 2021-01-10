@@ -20,32 +20,32 @@ public interface PostRepository extends JpaRepository<Post, String> {
 	
 	@Query(value = "SELECT P.* FROM " + 
 			"posts P INNER JOIN users U " + 
-			"ON P.user_id = U.id AND U.role_id = 1 AND p.is_deleted = 0", nativeQuery = true)
+			"ON P.user_id = U.id AND U.role_id = 2 AND p.is_deleted = 0", nativeQuery = true)
 	List<Post> findAllByAdmin();
 	
 	@Query(value = "SELECT P.* FROM " + 
 			"posts P INNER JOIN users U " + 
-			"ON P.user_id = U.id AND U.role_id = 2 AND p.is_deleted = 0", nativeQuery = true)
+			"ON P.user_id = U.id AND U.role_id = 1 AND p.is_deleted = 0", nativeQuery = true)
 	List<Post> findAllByUser();
 	
 	@Query(value = "SELECT p.*, u.role_id FROM POSTS p LEFT JOIN users u " + 
 			"ON p.user_id = u.id " + 
-			"WHERE u.role_id = 1 AND p.is_deleted = 1", nativeQuery = true)
+			"WHERE u.role_id = 2 AND p.is_deleted = 1", nativeQuery = true)
 	List<Post> findAllNewsDeleted();
 	
 	@Query(value = "SELECT p.*, u.role_id FROM POSTS p LEFT JOIN users u " + 
 			"ON p.user_id = u.id " + 
-			"WHERE u.role_id = 2 AND p.is_deleted = 1", nativeQuery = true)
+			"WHERE u.role_id = 1 AND p.is_deleted = 1", nativeQuery = true)
 	List<Post> findAllPostsDeleted();
 	
 	@Query(value = "SELECT P.* FROM posts P "
 			+ "INNER JOIN users U "
-			+ "ON P.user_id = U.id AND U.role_id = 1 AND p.is_deleted = 1", nativeQuery = true)
+			+ "ON P.user_id = U.id AND U.role_id = 2 AND p.is_deleted = 1", nativeQuery = true)
 	List<Post> findAllByAdminDeleted();
 	
 	@Query(value = "SELECT P.* FROM posts P "
 			+ "INNER JOIN users U "
-			+ "ON P.user_id = U.id AND U.role_id = 2 AND p.is_deleted = 1", nativeQuery = true)
+			+ "ON P.user_id = U.id AND U.role_id = 1 AND p.is_deleted = 1", nativeQuery = true)
 	List<Post> findAllByUserDeleted();
 	
 	@Query(value = "SELECT * FROM posts p WHERE p.user_id = :id AND p.is_deleted = 0", nativeQuery = true)

@@ -63,7 +63,7 @@ public class AdminNewsController {
 	String postAddNews(@ModelAttribute Post post, Model model, HttpServletRequest request,
 			@RequestPart("imageUpload") MultipartFile file) throws IOException {
 		HttpSession session = request.getSession();
-		int userId = (int) session.getAttribute(UserConstant.USER_ID);
+		int userId = (int) session.getAttribute(UserConstant.ADMIN_ID);
 		this.postService.save(post, userId, request, categoryService, file);
 		return "redirect:";
 	}

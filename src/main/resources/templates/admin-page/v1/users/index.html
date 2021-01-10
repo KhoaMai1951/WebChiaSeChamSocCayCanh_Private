@@ -63,11 +63,16 @@
 											<td><span data-th-text="${user.role.name}" class="badge badge-danger"></span></td> 
 											<td>
 												<a class="btn btn-primary btn-sm" th:href="@{|/admin/user/detail?id=${user.id}|}"> <i
-													class="fas fa-folder"> </i> Xem </a>   
+													class="fas fa-search"> </i> Xem </a>   
 												<a class="btn btn-danger btn-sm"
 													th:href="@{|/admin/user/soft-delete?id=${user.id}|}"> <i
 													class="fas fa-trash"> </i> Xóa
-											</a></td>
+												</a>
+												<a class="btn btn-warning btn-sm"
+												th:href="@{|/admin/user/update?id=${user.id}||}"> <i
+												class="fas fa-edit"></i> Cập nhật
+												</a>
+											</td>
 										</tr>
 									</th:block>
 								</tbody>

@@ -59,16 +59,14 @@ public class UserService {
 		return this.userRepository.findUserByEmail(user.getEmail());
 	}
 
-	public boolean verifyPassword(User user) { 
+	public boolean verifyPassword(User user) {
 		// find user in db
 		User userDB = this.findUserByEmail(user);
 		// if user exists
-		if(userDB != null) {
-			BCrypt.Result result = BCrypt
-					.verifyer()
-					.verify(user.getPassword().toCharArray(), userDB.getPassword());
+		if (userDB != null) {
+			BCrypt.Result result = BCrypt.verifyer().verify(user.getPassword().toCharArray(), userDB.getPassword());
 			// return password correct or not
-			return result.verified; 
+			return result.verified;
 		}
 		// user not exists
 		return false;
@@ -93,7 +91,6 @@ public class UserService {
 
 		if (this.userRepository.findEmail(u.getEmail()) == null) {
 			String passEncrypt = BCrypt.withDefaults().hashToString(12, u.getPassword().toCharArray());
-			System.out.println(passEncrypt);
 			User uTemp = new User();
 			uTemp.setEmail(u.getEmail());
 			uTemp.setPassword(passEncrypt);
@@ -108,8 +105,29 @@ public class UserService {
 			}
 			return true;
 		}
-
 		return false;
+	}
+
+	public boolean update(User u, int roleId) {
+		
+		User uTemp = this.findById(u.getId());
+		uTemp.setEmail(u.getEmail());
+		// if user input new password then change to that new one
+		if (u.getPassword() != null)
+		{
+			String passEncrypt = BCrypt.withDefaults().hashToString(12, u.getPassword().toCharArray());
+			uTemp.setPassword(passEncrypt);
+		} 
+		uTemp.setUsername(u.getUsername());
+		uTemp.setRole(this.roleRepository.findById(roleId));
+
+		try {
+			this.userRepository.save(uTemp);
+
+		} catch (Exception e) {
+
+		}
+		return true;
 	}
 
 	public boolean softDelete(int currentId, int targetId) {
@@ -120,19 +138,17 @@ public class UserService {
 		}
 		return false;
 	}
-	
-	public void restore(int id)
-	{
+
+	public void restore(int id) {
 		this.userRepository.restore(id);
 	}
 
 	public void deleteById(int id) {
 		this.userRepository.deleteById(id);
 	}
-	
-	public int findIdByEmail(String email)
-	{
+
+	public int findIdByEmail(String email) {
 		return this.userRepository.findIdByEmail(email);
 	}
- 
+
 }

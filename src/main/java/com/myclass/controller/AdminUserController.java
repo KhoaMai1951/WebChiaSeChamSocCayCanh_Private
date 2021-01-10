@@ -129,20 +129,19 @@ public class AdminUserController {
 		} else {
 			int roleId = Integer.parseInt((String) request.getParameter("roleId"));
 			// if save success
-			if(this.userService.save(user, roleId))
-			{
-				redirectAttributes.addFlashAttribute("success", 1);
+			if (this.userService.save(user, roleId)) {
+				redirectAttributes.addFlashAttribute("successAdd", 1);
 			}
 			// save fail
-			else 
-			{
-				redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
+			else {
+				redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user",
+						bindingResult);
 				redirectAttributes.addFlashAttribute("user", user);
 				return "redirect:/admin/user/add";
 			}
 			return "redirect:/admin/user/add";
 		}
-		
+
 	}
 
 	// soft delete
@@ -168,11 +167,41 @@ public class AdminUserController {
 		this.userService.deleteById(Integer.parseInt(id));
 		return "redirect:/admin/user/list";
 	}
-	
+
 	// restore deleted user
 	@GetMapping(path = "/restore")
 	String restoreDeletedUser(@RequestParam String id) {
 		this.userService.restore(Integer.parseInt(id));
 		return "redirect:/admin/user/deleted";
+	}
+
+	// user detail page
+	@GetMapping(path = "/detail")
+	String detailPage(@RequestParam String id, Model model) {
+		model.addAttribute("user", this.userService.findById(Integer.parseInt(id)));
+		return "admin-page/v1/users/detail";
+	}
+
+	// user update page
+	@GetMapping(path = "/update")
+	String updatePage(@RequestParam String id, Model model) {
+		model.addAttribute("user", this.userService.findById(Integer.parseInt(id)));
+		model.addAttribute("roles", this.roleService.findAll());
+
+		return "admin-page/v1/users/update";
+	}
+
+	// user update
+	@PostMapping(path = "/update")
+	String userUpdate(@ModelAttribute("user") User user, 
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes,
+			Model model) {
+		int roleId = Integer.parseInt((String) request.getParameter("roleId"));
+		// if update success
+		if(this.userService.update(user, roleId))
+			redirectAttributes.addFlashAttribute("successUpdate", 1);
+
+		return "redirect:/admin/user/detail?id=" + user.getId();
 	}
 }

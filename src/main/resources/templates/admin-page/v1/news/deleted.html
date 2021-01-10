@@ -59,14 +59,17 @@
 										<td data-th-text="${post.user.username}"></td>
 										<td><img alt="Avatar" class="table-avatar"
 											th:src="${post.image.url}"></td>
-										<td class="project-actions text-right"><a
-											class="btn btn-primary btn-sm" th:href="@{|/admin/news/restore?id=${post.id}|}"> <i
-												class="fas fa-folder"> </i> Khôi phục
-										</a> <a class="btn btn-danger btn-sm"
-											onclick="return confirm('Bạn có chắc muốn xóa?')" 
-											th:href="@{|/admin/news/delete?id=${post.id}|}">
-												<i class="fas fa-folder"> </i> Xóa hẳn
-										</a></td>
+										<td class="project-actions text-right">
+											<a
+												class="btn btn-primary btn-sm" th:href="@{|/admin/news/restore?id=${post.id}|}"> 
+												<i class="fas fa-trash-restore"></i> Khôi phục
+											</a> 
+											<a class="btn btn-danger btn-sm"
+												onclick="return confirm('Bạn có chắc muốn xóa?')" 
+												th:href="@{|/admin/news/delete?id=${post.id}|}">
+													<i class="fas fa-folder"> </i> Xóa hẳn
+											</a>
+										</td>
 									</tr>
 								</th:block>
 							</tbody>
