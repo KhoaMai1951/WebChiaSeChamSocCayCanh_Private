@@ -29,6 +29,7 @@ encoding//src/main/resources/templates/main-web/index.html=UTF-8
 encoding//src/main/resources/templates/main-web/v1/add.html=UTF-8
 encoding//src/main/resources/templates/main-web/v1/login.html=UTF-8
 encoding//src/main/resources/templates/main-web/v1/post-detail.html=UTF-8
+encoding//src/main/resources/templates/main-web/v1/register.html=UTF-8
 encoding//src/main/resources/templates/main-web/v1/user-detail.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

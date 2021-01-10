@@ -93,4 +93,13 @@ public class UserController {
 		
 		return "redirect:/post/detail?id=" + this.postService.save(post, userId, request, categoryService, file).getId();
 	}
+	
+	// register page
+	@GetMapping(path = "/new-user/register")
+	String registerPage(Model model) {
+		model.addAttribute("user", new User()); 
+		return "main-web/v1/register.html";
+	}
+
+	
 }

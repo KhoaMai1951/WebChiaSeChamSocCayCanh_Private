@@ -50,6 +50,9 @@
 						<a
 							th:if="${session.userId == null}" th:href="@{/user/login}"
 							aria-expanded="false" aria-controls="collapseExample">Đăng nhập</a>
+						<a class="ml-2"
+							th:if="${session.userId == null}" th:href="@{/new-user/register}"
+							aria-expanded="false" aria-controls="collapseExample">Đăng ký</a>
 						<a
 							class="mr-3" th:if="${session.userId != null}"
 							th:href="@{/user/logout}" aria-expanded="false"
