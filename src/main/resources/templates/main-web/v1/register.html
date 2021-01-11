@@ -16,15 +16,15 @@
 			<form th:action="@{/new-user/register}" th:object="${user}" method="POST">
 				<div class="form-group">
 					<label for="inputName">Username</label> <input type="text"
-						th:field="*{username}" class="form-control">
+						th:field="*{username}" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label for="inputName">Email</label> <input type="email"
-						th:field="*{email}" class="form-control">
+						th:field="*{email}" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label for="inputName">Password</label> <input type="password"
-						th:field="*{password}" class="form-control">
+						th:field="*{password}" class="form-control" required>
 				</div> 
 				<div class="form-group">
 					<button type="submit" class="btn btn-info float-left">
