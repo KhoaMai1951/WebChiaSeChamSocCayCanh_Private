@@ -12,16 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 @Entity(name = "categories")
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
-	@Column(name = "category_type_id")
-	private int categoryTypeId;
+	private int id; 
 
 	private String name;
 
@@ -30,6 +28,18 @@ public class Category {
 
 	@ManyToMany(mappedBy = "categories")
 	private List<Post> posts;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_type_id")  
+	private CategoryType categoryType;
+
+	public CategoryType getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(CategoryType categoryType) {
+		this.categoryType = categoryType;
+	}
 
 	public List<Post> getPosts() {
 		return posts;
@@ -45,15 +55,7 @@ public class Category {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getCategoryTypeId() {
-		return categoryTypeId;
-	}
-
-	public void setCategoryTypeId(int categoryTypeId) {
-		this.categoryTypeId = categoryTypeId;
-	}
+	} 
 
 	public String getName() {
 		return name;

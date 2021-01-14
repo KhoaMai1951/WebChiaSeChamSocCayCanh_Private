@@ -18,9 +18,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.myclass.repository.CategoryRepository;
 
 @Entity(name = "posts") 
 public class Post {
+	
 	@Id
 	private String id;
 
@@ -40,9 +44,10 @@ public class Post {
 	private boolean isDeleted;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "category_post", // Tạo ra một join Table tên là "address_person"
-			joinColumns = @JoinColumn(name = "post_id"), // TRong đó, khóa ngoại chính là address_id trỏ tới class
-			// hiện tại (Address)
+	@JoinTable(
+			name = "category_post", // Tạo ra một join Table tên là "address_person"
+			joinColumns = @JoinColumn(name = "post_id"), // Trong đó, khóa ngoại chính là post_id trỏ tới class
+														// hiện tại (Post)
 			inverseJoinColumns = @JoinColumn(name = "category_id") // Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
 																	// (Person)
 	)
@@ -89,6 +94,7 @@ public class Post {
 
 	public List<Category> getCategories() {
 		return categories;
+		//return this.repo.findTest();
 	}
 
 	public void setCategories(List<Category> categories) {

@@ -15,8 +15,15 @@ import com.myclass.entity.Post;
 @Repository
 public interface PostRepository extends JpaRepository<Post, String> {
 	@Override
-	@Query(value = "SELECT * FROM POSTS p WHERE p.is_deleted = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM POSTS p WHERE p.is_deleted = 0 ORDER BY p.created_date DESC", nativeQuery = true)
 	List<Post> findAll();
+ 
+	@Query(value = "SELECT * FROM posts p  " + 
+			"WHERE p.content LIKE %:condition% " + 
+			"OR p.title LIKE %:condition% " + 
+			"AND p.is_deleted = 0 " + 
+			"ORDER BY p.created_date DESC", nativeQuery = true)
+	List<Post> searchPost(@Param("condition") String condition);
 	
 	@Query(value = "SELECT P.* FROM " + 
 			"posts P INNER JOIN users U " + 

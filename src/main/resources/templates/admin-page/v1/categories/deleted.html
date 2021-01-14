@@ -13,16 +13,10 @@
 			<div id="main-content" class="container">
 				<h1> Danh sách danh mục </h1>
 				<div class="row"> 
-					<div class="col-lg-12" style="margin-top: 1rem;">
-						<a th:href="@{/admin/category/add}" type="button"
-							class="btn btn-primary float-left"> <i class="fas fa-plus"></i>
-							Thêm danh mục
-						</a>
-					</div>
-					<div class="col-lg-12" style="margin-top: 1rem;">
-						<a th:href="@{/admin/category/deleted}" type="button"
-							class="btn btn-warning float-left"> <i class="fas fa-trash-restore"></i>
-							Khôi phục danh mục
+					<div class="col-lg-12">
+						<a th:href="@{/admin/category/list}" type="button"
+							class="btn btn-info float-left"> <i class="fas fa-arrow-left"></i>
+							Quay lại trang danh sách danh mục
 						</a>
 					</div>
 
@@ -61,17 +55,9 @@
 											<td data-th-text="${category.categoryType.name}"> </td> 
 											<td>
 												<a
-													class="btn btn-primary btn-sm" th:href="@{|/admin/category/detail?id=${category.id}|}"> <i
-														class="fas fa-search"> </i> Xem
-												</a> 
-												<a class="btn btn-warning btn-sm"
-													th:href="@{|/admin/category/edit?id=${category.id}|}"> <i
-														class="fas fa-pencil-alt"> </i> Chỉnh sửa
-												</a> 
-												<a class="btn btn-danger btn-sm"
-													th:href="@{|/admin/category/soft-delete?id=${category.id}|}"> <i
-														class="fas fa-trash"> </i> Xóa
-												</a>
+													class="btn btn-primary btn-sm" th:href="@{|/admin/category/restore?id=${category.id}|}"> <i
+														class="fas fa-search"> </i> Khôi phục
+												</a>  
 											</td>
 										</tr>
 									</th:block>

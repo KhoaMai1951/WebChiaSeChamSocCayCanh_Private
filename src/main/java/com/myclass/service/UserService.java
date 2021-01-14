@@ -64,6 +64,7 @@ public class UserService {
 		User userDB = this.findUserByEmail(user);
 		// if user exists
 		if (userDB != null) {
+			// compare hashed input password with database hashed password
 			BCrypt.Result result = BCrypt.verifyer().verify(user.getPassword().toCharArray(), userDB.getPassword());
 			// return password correct or not
 			return result.verified;

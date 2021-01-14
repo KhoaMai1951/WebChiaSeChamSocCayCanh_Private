@@ -1,7 +1,11 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/categories/add.html=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/categories/deleted.html=UTF-8
 encoding//src/main/resources/templates/admin-page/v1/categories/index.html=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/comment/deleted.html=UTF-8
+encoding//src/main/resources/templates/admin-page/v1/comment/index.html=UTF-8
 encoding//src/main/resources/templates/admin-page/v1/index.html=UTF-8
 encoding//src/main/resources/templates/admin-page/v1/login.html=UTF-8
 encoding//src/main/resources/templates/admin-page/v1/news/add.html=UTF-8

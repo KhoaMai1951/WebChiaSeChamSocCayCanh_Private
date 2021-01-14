@@ -1,6 +1,7 @@
 package com.myclass.controller;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,31 +28,31 @@ import com.myclass.service.UserService;
 public class FrontPageController {
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	CategoryService categoryService;
 
 	@Autowired
 	PostService postService;
-	
+
 	@Autowired
 	CommentService commentService;
-	
+
 	@Autowired
 	CommentRepository commentRepo;
 
 	@GetMapping(path = "/")
 	String index(Model model) {
-		// model.addAttribute("user", userService.findById(1));
-		model.addAttribute("posts", postService.findAll()); 
+
+		model.addAttribute("posts", postService.findAllPostsWithCategories());
 
 		return "main-web/v1/garden-index.html";
 	}
-	
+
 	@GetMapping(path = "/post-by-category")
 	String postByCategory(Model model, @RequestParam(defaultValue = "id") String id) {
-		// model.addAttribute("user", userService.findById(1));
-		model.addAttribute("posts", postService.findAllByCategoryId(Integer.parseInt(id))); 
+
+		model.addAttribute("posts", postService.findAllByCategoryId(Integer.parseInt(id)));
 
 		return "main-web/v1/garden-index.html";
 	}
@@ -61,10 +62,17 @@ public class FrontPageController {
 		Post post = this.postService.findById(id);
 		model.addAttribute("user", userService.findUserByPostId(post));
 		model.addAttribute("post", post);
-		model.addAttribute("comment", new Comment()); 
-		model.addAttribute("comments", post.getComments());
+		model.addAttribute("comment", new Comment());
+		model.addAttribute("comments", this.commentService.getCommentsNotDeletedByPostId(post.getId()));
 		return "main-web/v1/post-detail.html";
 	}
-	
+
+	// search posts
+	@PostMapping(path = "/post/search")
+	String search(Model model, @ModelAttribute User user, HttpServletRequest request) {System.out.println(postService.searchPost("C"));
+		model.addAttribute("posts", postService.searchPost("C"));
+
+		return "main-web/v1/garden-index.html";
+	}
 
 }

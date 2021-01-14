@@ -22,12 +22,16 @@ import com.myclass.entity.Category;
 import com.myclass.entity.Image;
 import com.myclass.entity.Post;
 import com.myclass.entity.User;
+import com.myclass.repository.CategoryRepository;
 import com.myclass.repository.PostRepository;
 
 @Service
 public class PostService {
 	@Autowired
 	PostRepository postRepo;
+	
+	@Autowired
+	CategoryRepository categoryRepo;
 
 	public Post save(
 			Post post, 
@@ -109,6 +113,19 @@ public class PostService {
 
 	public List<Post> findAll() {
 		return postRepo.findAll();
+	} 
+	
+	public void setCategoryNotDeleted(List<Post> posts)
+	{
+		for (Post post : posts) {
+			post.setCategories(this.categoryRepo.findAllNotDeletedByPostId(post.getId()));
+		}
+	}
+	
+	public List<Post> findAllPostsWithCategories(){
+		List<Post> posts = this.findAll();
+		this.setCategoryNotDeleted(posts);
+		return posts;
 	}
 	
 	public List<Post> findAllByAdmin() {
@@ -155,4 +172,8 @@ public class PostService {
 	public void restore(String id) {
 		postRepo.restore(id);
 	}
+	
+	public List<Post> searchPost(String condition) {
+		return postRepo.searchPost(condition);
+	} 
 }
