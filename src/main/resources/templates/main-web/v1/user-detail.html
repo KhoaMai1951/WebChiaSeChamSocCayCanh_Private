@@ -11,10 +11,7 @@
 	<section class="col-lg-9" layout:fragment="content">
 		<div>
 			<p th:utext="${user.username}"></p>
-		</div>
-
-
-		
+		</div> 
 		<ul class="nav nav-tabs" id="myTab" data-tabs="tabs"> 
 			<li class="active"><a data-toggle="tab" href="#1">Bài viết</a></li>
 			<li th:if="${#strings.toString(session.userId) == param.id[0] }"><a data-toggle="tab" href="#2">Bài viết bạn đã comment</a></li>

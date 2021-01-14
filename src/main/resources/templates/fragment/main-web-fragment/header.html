@@ -53,7 +53,11 @@
 						<a
 							class="mr-3" th:if="${session.userId != null}"
 							th:href="@{/user/logout}" aria-expanded="false"
-							aria-controls="collapseExample">Đăng xuất</a> 
+							aria-controls="collapseExample">Đăng xuất</a>
+						<a
+							class="mr-3" th:if="${session.userId != null}"
+							th:href="@{/user/post/add}" aria-expanded="false"
+							aria-controls="collapseExample">Viết bài</a> 
 						<a
 							th:if="${session.userId != null}"
 							th:href="@{|/user/detail?id=${session.userId}|}"
