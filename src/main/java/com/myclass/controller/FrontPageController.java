@@ -70,7 +70,8 @@ public class FrontPageController {
 	// search posts
 	@PostMapping(path = "/post/search")
 	String search(Model model, @ModelAttribute User user, HttpServletRequest request) {System.out.println(postService.searchPost("C"));
-		model.addAttribute("posts", postService.searchPost("C"));
+		
+	model.addAttribute("posts", postService.searchPost((String) request.getAttribute("condition")));
 
 		return "main-web/v1/garden-index.html";
 	}
