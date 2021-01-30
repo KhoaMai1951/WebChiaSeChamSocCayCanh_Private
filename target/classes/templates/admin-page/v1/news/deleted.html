@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<div id="main-content" class="container">
+				<div class="row">
+					<h1>Bài viết đã xóa</h1>
+					<div class="col-lg-12">
+						<a th:href="@{/admin/news}" type="button"
+							class="btn btn-info float-left"> <i class="fas fa-arrow-left"></i>
+							Quay lại danh sách tin tức của admin
+						</a>
+					</div>
+				</div>
+
+				<!-- Default box -->
+				<div class="col-lg-12 card" style="margin-top: 1rem;">
+					<div class="card-header">
+						<h3 class="card-title">Tin tức</h3>
+
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool"
+								data-card-widget="collapse" data-toggle="tooltip"
+								title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-tool"
+								data-card-widget="remove" data-toggle="tooltip" title="Remove">
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<div class="card-body p-0">
+						<table class="table table-striped projects">
+							<thead>
+								<tr>
+									<th style="width: 1%">STT</th>
+									<th style="width: 20%">Tiêu đề</th>
+									<th style="width: 30%">Nội dung</th>
+									<th>Người viết</th>
+									<th style="width: 8%" class="text-center">Hình ảnh</th>
+									<th style="width: 20%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="post, custStat : ${posts}">
+									<tr>
+										<td data-th-text="${custStat.count}">#</td>
+										<td data-th-text="${post.title}"><input></td>
+										<td data-th-text="${post.content}"><input></td>
+										<td data-th-text="${post.user.username}"></td>
+										<td><img alt="Avatar" class="table-avatar"
+											th:src="${post.image.url}"></td>
+										<td class="project-actions text-right">
+											<a
+												class="btn btn-primary btn-sm" th:href="@{|/admin/news/restore?id=${post.id}|}"> 
+												<i class="fas fa-trash-restore"></i> Khôi phục
+											</a> 
+											<a class="btn btn-danger btn-sm"
+												onclick="return confirm('Bạn có chắc muốn xóa?')" 
+												th:href="@{|/admin/news/delete?id=${post.id}|}">
+													<i class="fas fa-folder"> </i> Xóa hẳn
+											</a>
+										</td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+
+			</div>
+		</div>
+
+	</section>
+
+</body>
+</html>

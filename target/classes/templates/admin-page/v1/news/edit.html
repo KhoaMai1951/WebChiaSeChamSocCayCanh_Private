@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit</title>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<div id="main-content" class="container">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">Sửa tin tức</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool"
+								data-card-widget="collapse" data-toggle="tooltip"
+								title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/admin/news/edit}" th:object="${post}"
+							method="POST" enctype="multipart/form-data">
+							<input type="text" hidden
+									th:field="*{id}" class="form-control">
+							<div class="form-group">
+								<label for="inputName">Tiêu đề</label> <input type="text"
+									th:field="*{title}" class="form-control">
+							</div>
+
+							<div class="form-group">
+								<label for="inputDescription">Nội dung bài viết</label>
+								<textarea th:field="*{content}" class="form-control" rows="4"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="inputStatus">Tag Cây Cảnh</label>
+								<div class="form-check">
+									<th:block th:each="plantCategory : ${plantCategories}">
+										<input th:checked="${#lists.contains(currentCategoryIds, plantCategory.id)}"
+											th:value="${plantCategory.name}"
+											th:name="|plantCategory${plantCategory.id}|" type="checkbox"
+											class="form-check-input"
+											th:id="|plantCategory${plantCategory.id}|">
+										<label th:utext="${plantCategory.name}"
+											style="margin-right: 2rem;" class="form-check-label"
+											for="exampleCheck1"> Check me out </label>
+									</th:block>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputStatus">Tag Nội Dung</label>
+								<div class="form-check">
+									<th:block th:each="contentCategory : ${contentCategories}">
+										<input th:checked="${#lists.contains(currentCategoryIds, contentCategory.id)}"
+											type="checkbox" class="form-check-input"
+											th:name="|contentCategory${contentCategory.id}|"
+											th:id="|contentCategory${contentCategory.id}|">
+										<label th:utext="${contentCategory.name}"
+											style="margin-right: 2rem;" class="form-check-label"
+											for="exampleCheck1"> Check me out </label>
+									</th:block>
+								</div>
+							</div> 
+							<div class="form-group">
+								<button type="submit" class="btn btn-info float-left">
+									<i class="fas fa-plus"></i> Sửa
+								</button>
+								<a class="btn btn-danger ml-2" th:href="@{/admin/news/}" role="button">Quay lại</a>
+							</div>
+						</form>
+					</div>
+					<!-- /.card-body -->
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+</body>
+</html>

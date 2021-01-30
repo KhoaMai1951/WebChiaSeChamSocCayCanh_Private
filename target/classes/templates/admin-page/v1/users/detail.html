@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<div id="main-content" class="container">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">Chi tiết người dùng</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool"
+								data-card-widget="collapse" data-toggle="tooltip"
+								title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<p>
+							<span th:if="${successAdd != null}" class="badge badge-success">Thêm
+								mới thành công!</span>
+							<span th:if="${successUpdate != null}"
+								class="badge badge-success">Cập nhật thành công!</span>
+
+							<!-- Detail field -->
+						<div>
+							<label>Email</label>
+							<p th:text="${user.email}" />
+						</div>
+						<div>
+							<label>Username</label>
+							<p th:text="${user.username}" />
+						</div>
+						<div>
+							<label>Vai trò</label>
+							<p>
+								<span data-th-text="${user.role.name}"
+									class="badge badge-danger"></span>
+							</p>
+						</div>
+
+						<!-- Navigate buttons -->
+						<a class="btn btn-warning btn-sm" th:href="@{|/admin/user/list|}">
+							<i class="fas fa-arrow-left"></i> Quay lại
+						</a> <a class="btn btn-primary btn-sm"
+							th:href="@{|/admin/user/update?id=${user.id}||}"> <i
+							class="fas fa-edit"></i> Cập nhật
+						</a>
+					</div>
+					<!-- /.card-body -->
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+</body>
+</html>

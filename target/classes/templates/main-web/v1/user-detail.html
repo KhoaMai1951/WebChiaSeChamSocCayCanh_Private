@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section class="col-lg-9" layout:fragment="content">
+		<div>
+			<p th:utext="${user.username}"></p>
+		</div> 
+		<ul class="nav nav-tabs" id="myTab" data-tabs="tabs"> 
+			<li class="active"><a data-toggle="tab" href="#1">Bài viết</a></li>
+			<li th:if="${#strings.toString(session.userId) == param.id[0] }"><a data-toggle="tab" href="#2">Bài viết bạn đã comment</a></li>
+			
+			<li th:if="${#strings.toString(session.userId) == param.id[0] }"><a data-toggle="tab" href="#3">Bài viết bạn đã lưu</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="1">
+				<!-- Post list -->
+				<th:block
+					th:replace="./fragment/main-web-fragment/post-list.html :: post-list"></th:block>
+			</div>
+			<div th:if="${(#strings.toString(session.userId) == param.id[0])}"  class="tab-pane" id="2">
+				<!-- Post list by user comment-->
+				<th:block
+					th:replace="./fragment/main-web-fragment/post-by-comment-list.html :: post-by-comment-list"></th:block>
+			</div>
+			<div th:if="${#strings.toString(session.userId) == param.id[0] }" class="tab-pane" id="3">
+				c
+			</div>
+		</div>
+		
+		
+		
+		<script>
+			$('#myTab a').click(function(e) {
+				e.preventDefault();
+				$(this).tab('show');
+			})
+		</script>
+	</section>
+
+</body>
+</html>

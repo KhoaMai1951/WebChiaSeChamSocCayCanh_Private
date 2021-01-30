@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="./fragment/admin-page-fragment/head.html :: head">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+
+		<!-- Navbar -->
+		<div th:replace="./fragment/admin-page-fragment/header.html :: header"></div>
+		<!-- /.navbar -->
+
+		<!-- Main Sidebar Container -->
+		<div th:replace="./fragment/admin-page-fragment/sidebar.html :: sidebar"></div>
+		<!-- /Main Sidebar Container -->
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div layout:fragment="content"></div>
+		<!-- /.content-wrapper -->
+		
+		<!-- Footer -->
+		<th:block th:include="./fragment/admin-page-fragment/footer.html :: footer"></th:block>
+		<!--/Footer -->
+
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+	
+	<!-- Scripts -->
+	<th:block th:include="./fragment/admin-page-fragment/script.html :: script"></th:block>
+	<!-- /Scripts -->
+	
+	<!-- Footer -->
+
+	<!-- /Footer -->
+</body>
+</html>

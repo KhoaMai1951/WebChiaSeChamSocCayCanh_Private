@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<div id="main-content" class="container">
+				<h1> Danh sách người dùng </h1>
+				<div class="row"> 
+					<div class="col-lg-12" style="margin-top: 1rem;">
+						<a th:href="@{/admin/user/add}" type="button"
+							class="btn btn-primary float-left"> <i class="fas fa-plus"></i>
+							Thêm người dùng
+						</a>
+					</div>
+					<div class="col-lg-12" style="margin-top: 1rem;">
+						<a th:href="@{/admin/user/deleted}" type="button"
+							class="btn btn-warning float-left"> <i class="fas fa-trash-restore"></i>
+							Khôi phục người dùng
+						</a>
+					</div>
+
+					<!-- Default box -->
+					<div class="col-lg-12 card" style="margin-top: 1rem;">
+						<div class="card-header">
+							<h3 class="card-title">Người dùng</h3>
+
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" data-toggle="tooltip"
+									title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool"
+									data-card-widget="remove" data-toggle="tooltip" title="Remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body p-0">
+							<table class="table table-striped projects">
+								<thead>
+									<tr>
+										<th  >STT</th> 
+										<th  >Username</th>
+										<th  >Email</th>
+										<th>Vai trò</th>
+										<th>Hành động</th>
+									</tr>
+								</thead>
+								<tbody>
+									<th:block th:each="user, custStat : ${users}">
+										<tr>
+											<td data-th-text="${custStat.count}">#</td>
+											<td data-th-text="${user.username}"><input></td>
+											<td data-th-text="${user.email}"> </td>
+											<td><span data-th-text="${user.role.name}" class="badge badge-danger"></span></td> 
+											<td>
+												<a class="btn btn-primary btn-sm" th:href="@{|/admin/user/detail?id=${user.id}|}"> <i
+													class="fas fa-search"> </i> Xem </a>   
+												<a class="btn btn-danger btn-sm"
+													th:href="@{|/admin/user/soft-delete?id=${user.id}|}"> <i
+													class="fas fa-trash"> </i> Xóa
+												</a>
+												<a class="btn btn-warning btn-sm"
+												th:href="@{|/admin/user/update?id=${user.id}||}"> <i
+												class="fas fa-edit"></i> Cập nhật
+												</a>
+											</td>
+										</tr>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

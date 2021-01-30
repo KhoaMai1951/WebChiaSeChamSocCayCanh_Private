@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.myclass.main.DoAn2ChiaSeChamSocCayCanhApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.529 s - in com.myclass.main.DoAn2ChiaSeChamSocCayCanhApplicationTests

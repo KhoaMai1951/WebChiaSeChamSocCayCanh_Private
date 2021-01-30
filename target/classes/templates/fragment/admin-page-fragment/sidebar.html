@@ -1,0 +1,177 @@
+<aside th:fragment="sidebar" xmlns:th="http://www.w3.org/1999/xhtml"
+	class="main-sidebar sidebar-dark-primary elevation-4">
+	<!-- Brand Logo -->
+	<a href="index3.html" class="brand-link"> <img
+		src="/admin-page/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+		class="brand-image img-circle elevation-3" style="opacity: .8">
+		<span class="brand-text font-weight-light">Admin</span>
+	</a>
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<!-- Sidebar user panel (optional) -->
+		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+			<div class="image">
+				<img src="/admin-page/dist/img/user2-160x160.jpg"
+					class="img-circle elevation-2" alt="User Image">
+			</div>
+			<div class="info">
+				<a href="#" class="d-block">Mai Đăng Khoa</a>
+			</div>
+		</div>
+
+		<!-- Sidebar Menu -->
+		<nav class="mt-2">
+
+			<!--  POSTS -->
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				data-widget="treeview" role="menu" data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li
+					th:classappend="
+						${#httpServletRequest.requestURI.contains('news') ? ' menu-open':'' }"
+					class="nav-item has-treeview"><a href="#"
+					class="nav-link active"> <i class="nav-icon fas fa-newspaper"></i>
+						<p>
+							Tin tức 
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/news}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/news' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Tin tức</p>
+						</a> <a th:href="@{/admin/news/add}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/news/add' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Thêm tin tức</p>
+						</a> <a th:href="@{/admin/news/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/news/deleted' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Khôi phục tin tức</p>
+						</a></li>
+					</ul></li>
+
+			</ul>
+
+
+			<!-- USERS -->
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				data-widget="treeview" role="menu" data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li
+					th:classappend="
+						${#httpServletRequest.requestURI.contains('user') ? ' menu-open':'' }"
+					class="nav-item has-treeview"><a href="#"
+					class="nav-link active"> <i
+						class="nav-icon fas fa-users"></i>
+						<p>
+							Người dùng 
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/user/posts}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/posts' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Bài viết</p>
+						</a> <a th:href="@{/admin/user/posts/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/posts/deleted' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Khôi phục bài viết</p>
+						</a>
+
+							<hr class="solid"> <a th:href="@{/admin/user/list}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/list' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Danh sách người dùng</p>
+						</a> <a th:href="@{/admin/user/add}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/add' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Thêm người dùng</p>
+						</a> <a th:href="@{/admin/user/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user/deleted' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Khôi phục người dùng</p>
+						</a></li>
+					</ul></li>
+
+			</ul>
+
+			<!-- CATEGORIES -->
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				data-widget="treeview" role="menu" data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li
+					th:classappend="
+						${#httpServletRequest.requestURI.contains('category') ? ' menu-open':'' }"
+					class="nav-item has-treeview"><a href="#"
+					class="nav-link active"> <i
+						class="nav-icon fas fa-folder"></i>
+						<p>
+						Danh mục 
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/category/list}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/category/list' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Danh sách danh mục</p>
+						</a></li>
+					</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/category/add}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/category/add' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Thêm danh mục</p>
+						</a></li>
+					</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/category/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/category/deleted' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Khôi phục danh mục</p>
+						</a></li>
+					</ul>
+				</li>
+
+			</ul>
+			
+			<!-- COMMENTS -->
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				data-widget="treeview" role="menu" data-accordion="false"> 
+				<li
+					th:classappend="
+						${#httpServletRequest.requestURI.contains('comment') ? ' menu-open':'' }"
+					class="nav-item has-treeview"><a href="#"
+					class="nav-link active"> <i
+						class="nav-icon fas fa-comments"></i>
+						<p>
+						Bình luận
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/comment/list}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/comment/list' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Danh sách bình luận</p>
+						</a></li>
+					</ul> 
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/admin/comment/deleted}"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/comment/deleted' ? 'active':''}"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Khôi phục bình luận</p>
+						</a></li>
+					</ul>
+				</li>
+
+			</ul>
+
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+</aside>

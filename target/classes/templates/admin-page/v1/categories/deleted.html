@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<div id="main-content" class="container">
+				<h1> Danh sách danh mục </h1>
+				<div class="row"> 
+					<div class="col-lg-12">
+						<a th:href="@{/admin/category/list}" type="button"
+							class="btn btn-info float-left"> <i class="fas fa-arrow-left"></i>
+							Quay lại trang danh sách danh mục
+						</a>
+					</div>
+
+					<!-- Default box -->
+					<div class="col-lg-12 card" style="margin-top: 1rem;">
+						<div class="card-header">
+							<h3 class="card-title">Danh mục</h3>
+
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" data-toggle="tooltip"
+									title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool"
+									data-card-widget="remove" data-toggle="tooltip" title="Remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body p-0">
+							<table class="table table-striped projects">
+								<thead>
+									<tr>
+										<th  >STT</th> 
+										<th  >Tên danh mục</th>
+										<th  >Loại danh mục</th> 
+										<th>Hành động</th>
+									</tr>
+								</thead>
+								<tbody>
+									<th:block th:each="category, custStat : ${categories}">
+										<tr>
+											<td data-th-text="${custStat.count}">#</td>
+											<td data-th-text="${category.name}"><input></td>
+											<td data-th-text="${category.categoryType.name}"> </td> 
+											<td>
+												<a
+													class="btn btn-primary btn-sm" th:href="@{|/admin/category/restore?id=${category.id}|}"> <i
+														class="fas fa-search"> </i> Khôi phục
+												</a>  
+											</td>
+										</tr>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

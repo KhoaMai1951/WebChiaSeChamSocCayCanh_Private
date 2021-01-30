@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/admin-layout}"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Trang Admin</title>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<div id="main-content" class="container">
+				<h1> Danh sách bình luận </h1>
+				<div class="row"> 
+					<div class="col-lg-12" style="margin-top: 1rem;">
+						<a th:href="@{/admin/comment/deleted}" type="button"
+							class="btn btn-warning float-left"> <i class="fas fa-trash-restore"></i>
+							Khôi phục bình luận
+						</a>
+					</div>
+
+					<!-- Default box -->
+					<div class="col-lg-12 card" style="margin-top: 1rem;">
+						<div class="card-header">
+							<h3 class="card-title">Bình luận</h3> 
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" data-toggle="tooltip"
+									title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool"
+									data-card-widget="remove" data-toggle="tooltip" title="Remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body p-0">
+							<table class="table table-striped projects">
+								<thead>
+									<tr>
+										<th  >STT</th> 
+										<th  >Nội dung bình luận</th>
+										<th  >Thuộc bài viết</th> 
+										<th  >Thuộc user</th> 
+										<th>Hành động</th>
+									</tr>
+								</thead>
+								<tbody>
+									<th:block th:each="comment, custStat : ${comments}">
+										<tr>
+											<td data-th-text="${custStat.count}">#</td>
+											<td data-th-text="${comment.content}"></td>
+											<td> 
+												<a 
+													th:href="@{|/admin/news/detail?id=${comment.post.id}|}"
+													data-th-text="${comment.post.title}">
+												</a> 
+											</td> 
+											<td> 
+												<a 
+													th:href="@{|/admin/user/detail?id=${comment.user.id}|}"
+													data-th-text="${comment.user.username}">
+												</a> 
+											</td> 
+											<td>
+												<a
+													class="btn btn-primary btn-sm" th:href="@{|/admin/comment/detail?id=${comment.id}|}"> <i
+														class="fas fa-search"> </i> Xem
+												</a>   
+												<a class="btn btn-danger btn-sm"
+													th:href="@{|/admin/comment/soft-delete?id=${comment.id}|}"> <i
+														class="fas fa-trash"> </i> Xóa
+												</a>
+											</td>
+										</tr>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
